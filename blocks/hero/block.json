@@ -1,0 +1,93 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "vestelli/hero",
+  "title": "Hero",
+  "category": "vestelli",
+  "icon": "cover-image",
+  "description": "Hero section with title, description, background image, and CTA buttons",
+  "keywords": ["hero", "banner", "header", "cta"],
+  "textdomain": "vestelli",
+  "editorScript": "file:./editor.js",
+  "editorStyle": "file:./editor.css",
+  "style": "file:./style.css",
+  "render": "file:./render.php",
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "backgroundImage": {
+      "type": "object",
+      "default": null
+    },
+    "backgroundImageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "overlayOpacity": {
+      "type": "number",
+      "default": 0.5
+    },
+    "overlayColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "alignment": {
+      "type": "string",
+      "default": "left"
+    },
+    "height": {
+      "type": "string",
+      "default": "60vh"
+    },
+    "showButton1": {
+      "type": "boolean",
+      "default": true
+    },
+    "button1Text": {
+      "type": "string",
+      "default": "Pyydä tarjous"
+    },
+    "button1Url": {
+      "type": "string",
+      "default": "/pyyda-tarjous"
+    },
+    "button1OpenNewTab": {
+      "type": "boolean",
+      "default": false
+    },
+    "showButton2": {
+      "type": "boolean",
+      "default": false
+    },
+    "button2Text": {
+      "type": "string",
+      "default": "Lue lisää"
+    },
+    "button2Url": {
+      "type": "string",
+      "default": "#"
+    },
+    "button2OpenNewTab": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"],
+    "spacing": {
+      "padding": true,
+      "margin": true
+    }
+  }
+}

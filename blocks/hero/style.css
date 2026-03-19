@@ -1,0 +1,197 @@
+/**
+ * Hero Block Frontend Styles
+ * 
+ * @package Vestelli
+ */
+
+.avalon-hero-block {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  min-height: 60vh;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Full width alignment */
+.wp-block-vestelli-hero.alignfull,
+.avalon-hero-block.alignfull {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* Wide alignment */
+.wp-block-vestelli-hero.alignwide,
+.avalon-hero-block.alignwide {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.avalon-hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.avalon-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.avalon-hero-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1650px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 80vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 0 2rem;
+  padding-bottom: 100px;
+  box-sizing: border-box;
+}
+
+.avalon-hero-inner {
+  width: 50%;
+  text-align: left;
+}
+
+/* Alignment */
+.avalon-hero-align-left {
+  text-align: left;
+}
+
+.avalon-hero-align-center {
+  text-align: center;
+}
+
+.avalon-hero-align-right {
+  text-align: right;
+}
+
+.avalon-hero-align-left .avalon-hero-buttons {
+  justify-content: flex-start;
+}
+
+.avalon-hero-align-center .avalon-hero-buttons {
+  justify-content: center;
+}
+
+.avalon-hero-align-right .avalon-hero-buttons {
+  justify-content: flex-end;
+}
+
+/* Title - h1 bolded, uses theme defaults */
+.avalon-hero-title {
+  font-weight: bold;
+  margin: 0 0 24px 0;
+  color: inherit;
+}
+
+/* Description - h3, uses theme defaults */
+.avalon-hero-description {
+  margin: 0 0 32px 0;
+  color: inherit;
+  opacity: 0.95;
+}
+
+.avalon-hero-description p {
+  margin: 0;
+}
+
+/* Buttons */
+.avalon-hero-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+.avalon-hero-button {
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.avalon-hero-button-primary {
+  background-color: #30CBD3;
+  color: #ffffff;
+  border-color: #30CBD3;
+}
+
+.avalon-hero-button-primary:hover {
+  background-color: #28b5bd;
+  border-color: #28b5bd;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(48, 203, 211, 0.4);
+}
+
+.avalon-hero-button-secondary {
+  background-color: transparent;
+  color: inherit;
+  border-color: currentColor;
+}
+
+.avalon-hero-button-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .avalon-hero-block {
+    min-height: 50vh;
+  }
+  
+  .avalon-hero-content {
+    min-height: 100vh;
+    padding: 0 1.5rem;
+    padding-bottom: 40px;
+  }
+  
+  
+  .avalon-hero-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .avalon-hero-button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .avalon-hero-block {
+    min-height: 40vh;
+  }
+  
+  .avalon-hero-content {
+    min-height: 100vh;
+    padding: 0 1rem;
+    padding-bottom: 30px;
+  }
+}

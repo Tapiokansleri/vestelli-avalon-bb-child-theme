@@ -1,0 +1,331 @@
+/**
+ * Liitetyt tuotteet Module Styles
+ * 
+ * @package Vestelli
+ */
+
+.avalon-linked-products {
+  margin: 40px 0;
+}
+
+.avalon-linked-products-title {
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #012b55;
+  font-family: 'Roboto', sans-serif;
+  text-align: left;
+}
+
+.avalon-linked-products-empty {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+/* Products list - unique class to avoid WooCommerce conflicts */
+.avalon-linked-products .avalon-linked-products-list,
+.avalon-linked-products .avalon-linked-products-list.products {
+  display: grid !important;
+  grid-template-columns: repeat(var(--columns, 2), 1fr) !important;
+  gap: 20px !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+/* Fix for theme clearfixes interfering with grid layout */
+.avalon-linked-products .avalon-linked-products-list::before,
+.avalon-linked-products .avalon-linked-products-list::after,
+.avalon-linked-products .avalon-linked-products-list.products::before,
+.avalon-linked-products .avalon-linked-products-list.products::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Column layouts based on product count */
+.avalon-linked-products[data-columns="2"] .avalon-linked-products-list {
+  grid-template-columns: repeat(2, 1fr) !important; /* 50% 50% */
+}
+
+.avalon-linked-products[data-columns="3"] .avalon-linked-products-list {
+  grid-template-columns: repeat(3, 1fr) !important; /* 33% each */
+}
+
+.avalon-linked-products[data-columns="4"] .avalon-linked-products-list {
+  grid-template-columns: repeat(4, 1fr) !important; /* 25% each */
+}
+
+/* Product card styling - extremely specific to override WooCommerce */
+.avalon-linked-products .avalon-linked-products-list li.product,
+.avalon-linked-products .avalon-linked-products-list.products li.product {
+  background-color: #F6F7F7 !important;
+  border-radius: 0 !important;
+  padding: 20px !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-shadow: none !important;
+  border: none !important;
+  width: 100% !important;
+  position: relative !important;
+  list-style: none !important;
+  float: none !important;
+  padding-bottom: 20px !important; /* Normal padding since no button */
+}
+
+/* Remove any WooCommerce product card pseudo-elements */
+.avalon-linked-products .avalon-linked-products-list li.product::before,
+.avalon-linked-products .avalon-linked-products-list li.product::after,
+.avalon-linked-products .avalon-linked-products-list.products li.product::before,
+.avalon-linked-products .avalon-linked-products-list.products li.product::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Product image wrapper - override WooCommerce styles */
+.avalon-linked-products .avalon-linked-products-list li.product .woocommerce-LoopProduct-link,
+.avalon-linked-products .avalon-linked-products-list.products li.product .woocommerce-LoopProduct-link {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-grow: 1 !important;
+  background-color: #F6F7F7 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  order: -1 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.avalon-linked-products .avalon-linked-products-list li.product picture,
+.avalon-linked-products .avalon-linked-products-list li.product img,
+.avalon-linked-products .avalon-linked-products-list.products li.product picture,
+.avalon-linked-products .avalon-linked-products-list.products li.product img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  margin: 0 auto 15px !important;
+  max-height: 250px !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.avalon-linked-products .avalon-linked-products-list li.product img,
+.avalon-linked-products .avalon-linked-products-list.products li.product img {
+  object-fit: contain !important;
+  background-color: #F6F7F7 !important;
+}
+
+/* Product title - override WooCommerce styles */
+.avalon-linked-products .avalon-linked-products-list li.product .woocommerce-loop-product__title,
+.avalon-linked-products .avalon-linked-products-list li.product h2,
+.avalon-linked-products .avalon-linked-products-list.products li.product .woocommerce-loop-product__title,
+.avalon-linked-products .avalon-linked-products-list.products li.product h2 {
+  color: #012b55 !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  font-family: 'Roboto', sans-serif !important;
+  margin: 0 0 5px 0 !important;
+  text-align: left !important;
+  line-height: 1.4 !important;
+  flex-grow: 0 !important;
+  padding: 0 !important;
+}
+
+.avalon-linked-products .avalon-linked-products-list li.product .woocommerce-LoopProduct-link:hover .woocommerce-loop-product__title,
+.avalon-linked-products .avalon-linked-products-list li.product .woocommerce-LoopProduct-link:hover h2,
+.avalon-linked-products .avalon-linked-products-list.products li.product .woocommerce-LoopProduct-link:hover .woocommerce-loop-product__title,
+.avalon-linked-products .avalon-linked-products-list.products li.product .woocommerce-LoopProduct-link:hover h2 {
+  color: #012b55 !important;
+  text-decoration: none !important;
+}
+
+/* Price - override WooCommerce styles */
+.avalon-linked-products .avalon-linked-products-list li.product .price,
+.avalon-linked-products .avalon-linked-products-list.products li.product .price {
+  color: #666666 !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  margin: 0 !important;
+  text-align: left !important;
+  display: block !important;
+  padding: 0 !important;
+}
+
+.avalon-linked-products .avalon-linked-products-list li.product .price .amount,
+.avalon-linked-products .avalon-linked-products-list.products li.product .price .amount {
+  color: #666666 !important;
+}
+
+/* Create a flex wrapper for title/price and button using CSS Grid/Flex trick */
+/* Target all direct children after the image link */
+.avalon-linked-products .avalon-linked-products-list li.product > .woocommerce-loop-product__title,
+.avalon-linked-products .avalon-linked-products-list li.product > h2,
+.avalon-linked-products .avalon-linked-products-list.products li.product > .woocommerce-loop-product__title,
+.avalon-linked-products .avalon-linked-products-list.products li.product > h2 {
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
+  gap: 15px !important;
+  flex-wrap: wrap !important;
+}
+
+/* Make price and button align horizontally with title */
+.avalon-linked-products .avalon-linked-products-list li.product > .price,
+.avalon-linked-products .avalon-linked-products-list.products li.product > .price {
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+/* Group title and price together */
+.avalon-linked-products .avalon-linked-products-list li.product > .woocommerce-loop-product__title + .price,
+.avalon-linked-products .avalon-linked-products-list li.product > h2 + .price,
+.avalon-linked-products .avalon-linked-products-list.products li.product > .woocommerce-loop-product__title + .price,
+.avalon-linked-products .avalon-linked-products-list.products li.product > h2 + .price {
+  margin-top: 0 !important;
+  display: inline-block !important;
+  vertical-align: bottom !important;
+}
+
+/* Add to Cart button - hide buttons */
+.avalon-linked-products .avalon-linked-products-list li.product .button,
+.avalon-linked-products .avalon-linked-products-list li.product a.button,
+.avalon-linked-products .avalon-linked-products-list li.product button.button,
+.avalon-linked-products .avalon-linked-products-list li.product input.button,
+.avalon-linked-products .avalon-linked-products-list li.product form.cart,
+.avalon-linked-products .avalon-linked-products-list.products li.product .button,
+.avalon-linked-products .avalon-linked-products-list.products li.product a.button,
+.avalon-linked-products .avalon-linked-products-list.products li.product button.button,
+.avalon-linked-products .avalon-linked-products-list.products li.product input.button,
+.avalon-linked-products .avalon-linked-products-list.products li.product form.cart {
+  display: none !important;
+}
+
+.avalon-linked-products .avalon-linked-products-list li.product .button:hover,
+.avalon-linked-products .avalon-linked-products-list li.product a.button:hover,
+.avalon-linked-products .avalon-linked-products-list li.product button.button:hover,
+.avalon-linked-products .avalon-linked-products-list li.product input.button:hover,
+.avalon-linked-products .avalon-linked-products-list.products li.product .button:hover,
+.avalon-linked-products .avalon-linked-products-list.products li.product a.button:hover,
+.avalon-linked-products .avalon-linked-products-list.products li.product button.button:hover,
+.avalon-linked-products .avalon-linked-products-list.products li.product input.button:hover {
+  background-color: #3bc4bd !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+/* Product content wrapper - use CSS Grid for proper alignment */
+.avalon-linked-products .avalon-linked-products-list li.product .avalon-product-content-wrapper,
+.avalon-linked-products .avalon-linked-products-list.products li.product .avalon-product-content-wrapper {
+  display: grid !important;
+  grid-template-columns: 1fr auto !important;
+  grid-template-rows: auto auto !important;
+  gap: 0 15px !important;
+  align-items: end !important;
+  margin-top: 0 !important;
+}
+
+/* Title - first row, first column */
+.avalon-linked-products .avalon-linked-products-list li.product .avalon-product-content-wrapper > .woocommerce-loop-product__title,
+.avalon-linked-products .avalon-linked-products-list li.product .avalon-product-content-wrapper > h2,
+.avalon-linked-products .avalon-linked-products-list.products li.product .avalon-product-content-wrapper > .woocommerce-loop-product__title,
+.avalon-linked-products .avalon-linked-products-list.products li.product .avalon-product-content-wrapper > h2 {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  margin-right: 0 !important;
+}
+
+/* Price - second row, first column */
+.avalon-linked-products .avalon-linked-products-list li.product .avalon-product-content-wrapper > .price,
+.avalon-linked-products .avalon-linked-products-list.products li.product .avalon-product-content-wrapper > .price {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Button - second row, second column, aligned to bottom */
+.avalon-linked-products .avalon-linked-products-list li.product .avalon-product-content-wrapper > .button,
+.avalon-linked-products .avalon-linked-products-list li.product .avalon-product-content-wrapper > a.button,
+.avalon-linked-products .avalon-linked-products-list li.product .avalon-product-content-wrapper > button.button,
+.avalon-linked-products .avalon-linked-products-list li.product .avalon-product-content-wrapper > input.button,
+.avalon-linked-products .avalon-linked-products-list li.product .avalon-product-content-wrapper > form.cart,
+.avalon-linked-products .avalon-linked-products-list.products li.product .avalon-product-content-wrapper > .button,
+.avalon-linked-products .avalon-linked-products-list.products li.product .avalon-product-content-wrapper > a.button,
+.avalon-linked-products .avalon-linked-products-list.products li.product .avalon-product-content-wrapper > button.button,
+.avalon-linked-products .avalon-linked-products-list.products li.product .avalon-product-content-wrapper > input.button,
+.avalon-linked-products .avalon-linked-products-list.products li.product .avalon-product-content-wrapper > form.cart {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  align-self: end !important;
+  margin-bottom: 0 !important;
+}
+
+
+/* Price wrapper */
+.avalon-linked-products .avalon-linked-products-list li.product .price-wrapper,
+.avalon-linked-products .avalon-linked-products-list.products li.product .price-wrapper {
+  margin-bottom: 15px !important;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  /* Tablet: max 3 columns */
+  .avalon-linked-products[data-columns="4"] .avalon-linked-products-list {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .avalon-linked-products-title {
+    font-size: 20px;
+  }
+  
+  /* Tablet small: max 2 columns */
+  .avalon-linked-products .avalon-linked-products-list,
+  .avalon-linked-products[data-columns="2"] .avalon-linked-products-list,
+  .avalon-linked-products[data-columns="3"] .avalon-linked-products-list,
+  .avalon-linked-products[data-columns="4"] .avalon-linked-products-list {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Mobile: 2 columns, smaller padding */
+  .avalon-linked-products .avalon-linked-products-list,
+  .avalon-linked-products[data-columns="2"] .avalon-linked-products-list,
+  .avalon-linked-products[data-columns="3"] .avalon-linked-products-list,
+  .avalon-linked-products[data-columns="4"] .avalon-linked-products-list {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+  
+  .avalon-linked-products-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .avalon-linked-products .avalon-linked-products-list li.product,
+  .avalon-linked-products .avalon-linked-products-list.products li.product {
+    padding: 10px !important;
+  }
+  
+  .avalon-linked-products .avalon-linked-products-list li.product .woocommerce-loop-product__title,
+  .avalon-linked-products .avalon-linked-products-list li.product h2,
+  .avalon-linked-products .avalon-linked-products-list.products li.product .woocommerce-loop-product__title,
+  .avalon-linked-products .avalon-linked-products-list.products li.product h2 {
+    font-size: 13px !important;
+  }
+  
+  .avalon-linked-products .avalon-linked-products-list li.product .price,
+  .avalon-linked-products .avalon-linked-products-list.products li.product .price {
+    font-size: 12px !important;
+  }
+}

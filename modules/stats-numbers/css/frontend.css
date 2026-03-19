@@ -1,0 +1,226 @@
+/**
+ * Stats Numbers Module Frontend Styles
+ * 
+ * @package Vestelli
+ */
+
+.avalon-stats-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  padding: 36px 0 20px;
+}
+
+.avalon-stats-title {
+  position: relative;
+  font-weight: 700;
+  margin: 0 0 70px 0;
+  text-align: center;
+  font-size: clamp(34px, 3.8vw, 56px);
+  line-height: 1.1;
+}
+
+.avalon-stats-title::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -28px;
+  width: 132px;
+  height: 18px;
+  background: url("/wp-content/uploads/2026/03/element_wave_03-scaled.png") no-repeat center center;
+  background-size: contain;
+  opacity: 0.85;
+}
+
+.avalon-stats-container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 22px;
+  width: 100%;
+  align-items: stretch;
+}
+
+.avalon-stat-card-wrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.avalon-stat-item {
+  border-radius: 0;
+  border: 1px solid #eef0f2;
+  padding: 52px 34px 94px;
+  text-align: center;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  position: relative;
+  min-height: 335px;
+}
+
+.avalon-stat-wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 24px;
+  text-align: center;
+  line-height: 0;
+}
+
+.avalon-stat-wave img {
+  width: 84%;
+  max-width: 240px;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.82;
+}
+
+.avalon-stat-media {
+  min-height: 72px;
+  margin-bottom: 18px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avalon-stat-icon {
+  font-size: clamp(44px, 3.5vw, 62px);
+  line-height: 1;
+}
+
+.avalon-stat-icon i {
+  display: block;
+}
+
+.avalon-stat-image {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avalon-stat-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.avalon-stat-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.avalon-stat-title {
+  font-size: clamp(34px, 3.1vw, 50px);
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+}
+
+.avalon-stat-subtitle {
+  font-size: clamp(15px, 1.2vw, 19px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+.avalon-stat-description {
+  font-size: clamp(14px, 1.05vw, 17px);
+  line-height: 1.2;
+  margin-top: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.avalon-stats-empty {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+@media (max-width: 1200px) {
+  .avalon-stats-title {
+    margin-bottom: 58px;
+  }
+
+  .avalon-stats-title::after {
+    width: 112px;
+    bottom: -24px;
+  }
+
+  .avalon-stat-item {
+    min-height: 305px;
+    padding: 44px 22px 82px;
+  }
+
+  .avalon-stat-wave {
+    bottom: 18px;
+  }
+
+  .avalon-stat-wave img {
+    max-width: 205px;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .avalon-stats-wrapper {
+    padding: 26px 0 8px;
+  }
+
+  .avalon-stats-title {
+    margin-bottom: 42px;
+    font-size: clamp(28px, 7vw, 40px);
+  }
+
+  .avalon-stats-title::after {
+    width: 92px;
+    bottom: -20px;
+  }
+
+  .avalon-stats-container {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .avalon-stat-card-wrap {
+    flex: 1 1 100%;
+  }
+
+  .avalon-stat-item {
+    min-height: 250px;
+    padding: 30px 16px 70px;
+  }
+
+  .avalon-stat-wave {
+    bottom: 14px;
+  }
+
+  .avalon-stat-wave img {
+    max-width: 176px;
+  }
+
+  .avalon-stat-icon {
+    font-size: 38px;
+  }
+
+  .avalon-stat-image {
+    width: 58px;
+    height: 58px;
+  }
+
+}

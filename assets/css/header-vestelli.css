@@ -1,0 +1,1185 @@
+/**
+ * Header Styles - Vestelli
+ * Container 1350px | Left: solid white | Right: rgba(27,42,87,0.9) with extras above nav
+ *
+ * @package Vestelli
+ */
+
+/* Base header - full width bar, overlays content */
+.vestelli-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 0;
+  z-index: 9999;
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Fill left with white, right with blue (extends to viewport edge) - white narrow, blue tight to logo */
+.vestelli-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: max(12.5%, calc(50% - 540px));
+  background: #fff;
+  z-index: 0;
+}
+
+.vestelli-header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: max(12.5%, calc(50% - 540px));
+  margin-left: -1px; /* Overlap to avoid subpixel seam */
+  background: rgba(27, 42, 87, 0.9);
+  z-index: 0;
+}
+
+/* Container: max 1350px, centered - above pseudo-elements */
+.vestelli-header-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Two-column layout */
+.vestelli-header-inner {
+  display: flex;
+  align-items: stretch;
+  min-height: 90px;
+  width: 100%;
+}
+
+/* ---- LEFT: Logo section (solid white) ---- */
+.vestelli-header-logo-section {
+  flex: 0 0 12.5%;
+  max-width: 172px;
+  min-width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 12px 12px 12px 8px;
+  background: transparent;
+}
+
+.vestelli-logo-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.vestelli-custom-logo {
+  max-height: 48px;
+  width: auto;
+  display: block;
+}
+
+.vestelli-logo-mark {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 2px;
+}
+
+.vestelli-logo-droplet {
+  width: 18px;
+  height: 24px;
+  color: #1b2a57;
+  vertical-align: middle;
+}
+
+.vestelli-logo-text {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: 28px;
+  font-weight: 400;
+  font-style: italic;
+  color: #1b2a57;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.vestelli-logo-link:hover .vestelli-logo-text {
+  color: #1b2a57;
+}
+
+/* ---- RIGHT: Dark blue section (single row: nav + extras) ---- */
+.vestelli-header-nav-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 14px 32px 14px 24px;
+  background: transparent;
+}
+
+.vestelli-header-main-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Single extras row */
+.vestelli-header-extras {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+  flex-shrink: 0;
+}
+
+.vestelli-social-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vestelli-social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.vestelli-social-icons a:hover {
+  color: #fff;
+}
+
+.vestelli-social-icons svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.vestelli-search-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.vestelli-search-toggle:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+.vestelli-search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10020;
+  display: none;
+}
+
+.vestelli-search-overlay.is-open {
+  display: block;
+}
+
+.vestelli-search-overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.vestelli-search-overlay-panel {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92vw, 680px);
+  background: #fff;
+  padding: 18px;
+  border-radius: 8px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+}
+
+.vestelli-search-overlay-close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: #1b2a57;
+  cursor: pointer;
+}
+
+.vestelli-header-search-overlay-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.vestelli-header-search-overlay-form input[type="search"] {
+  flex: 1;
+  height: 42px;
+  border: 1px solid rgba(27, 42, 87, 0.25);
+  border-radius: 4px;
+  padding: 0 12px;
+  font-size: 15px;
+  color: #1b2a57;
+}
+
+.vestelli-header-search-overlay-form button {
+  height: 42px;
+  border: none;
+  background: #1b2a57;
+  color: #fff;
+  padding: 0 18px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.vestelli-header-nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1;
+}
+
+.vestelli-main-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.vestelli-main-menu > li {
+  position: relative;
+  margin: 0;
+}
+
+.vestelli-main-menu > li > a {
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.vestelli-main-menu > li > a:hover {
+  opacity: 0.9;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Dropdown chevron (keep existing structure) */
+.vestelli-main-menu .dropdown-chevron {
+  margin-left: 4px;
+}
+
+/* Submenus - dark blue to match right section */
+.vestelli-main-menu > li > .sub-menu {
+  background-color: rgba(27, 42, 87, 0.98);
+  border-top: 2px solid rgba(48, 203, 211, 0.25);
+}
+
+.vestelli-language-switcher {
+  position: relative;
+}
+
+.vestelli-lang-select {
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 4px;
+  height: 36px;
+  padding: 0 28px 0 12px;
+  box-sizing: border-box;
+  appearance: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.vestelli-lang-select option {
+  background-color: rgba(27, 42, 87, 1);
+  color: #fff;
+}
+
+.vestelli-cta-button {
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1b2a57;
+  background-color: #fff;
+  height: 36px;
+  padding: 0 24px;
+  box-sizing: border-box;
+  border-radius: 0;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  white-space: nowrap;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: background-color 0.3s ease, padding 0.3s ease;
+}
+
+.vestelli-cta-button span {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.vestelli-cta-button::after {
+  content: '›';
+  font-size: 18px;
+  line-height: 1;
+  display: inline-block;
+  width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: width 0.3s ease, opacity 0.3s ease, margin 0.3s ease;
+  margin-left: 0;
+}
+
+.vestelli-cta-button:hover {
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #1b2a57;
+  text-decoration: none !important;
+  padding: 0 20px;
+}
+
+.vestelli-cta-button:hover span {
+  transform: translateX(-4px);
+}
+
+.vestelli-cta-button:hover::after {
+  width: 12px;
+  opacity: 1;
+  margin-left: 2px;
+}
+
+.vestelli-cart-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  padding: 6px;
+}
+
+.vestelli-cart-link svg {
+  width: 20px;
+  height: 20px;
+}
+
+.vestelli-cart-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background-color: #1b2a57;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 50%;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+.vestelli-header.header-hidden {
+  transform: translateY(-100%);
+}
+
+.vestelli-header.header-visible {
+  transform: translateY(0);
+}
+
+
+.fl-builder-edit .vestelli-header {
+  top: 0px !important;
+}
+
+
+/* Ensure header is at top when admin bar is not visible */
+body:not(.admin-bar) .vestelli-header {
+  top: 0;
+}
+
+/* Remove padding from content area - header overlays content */
+.fl-page {
+  padding-top: 0;
+}
+
+/* Submenu styles for vestelli (shared with legacy) */
+.vestelli-main-menu > li > .sub-menu,
+.main-menu > li > .sub-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 280px;
+  list-style: none;
+  margin: 0;
+  padding: 12px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.25s ease;
+  z-index: 9998;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.vestelli-main-menu > li:not(.has-mega):hover > .sub-menu,
+.main-menu > li:not(.has-mega):hover > .sub-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.vestelli-main-menu .sub-menu li:hover > .sub-menu,
+.main-menu .sub-menu li:hover > .sub-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.vestelli-main-menu .sub-menu li,
+.main-menu .sub-menu li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+}
+
+.vestelli-main-menu .sub-menu li:last-child,
+.main-menu .sub-menu li:last-child {
+  border-bottom: none;
+}
+
+.vestelli-main-menu .sub-menu a,
+.main-menu .sub-menu a {
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.95);
+  text-decoration: none;
+  padding: 12px 20px;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  transition: background-color 0.2s ease, padding-left 0.2s ease;
+}
+
+.vestelli-main-menu .sub-menu a:hover,
+.main-menu .sub-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding-left: 24px;
+}
+
+.vestelli-main-menu .sub-menu .sub-menu,
+.main-menu .sub-menu .sub-menu {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-left: 0;
+  z-index: 1001;
+}
+
+.dropdown-icon {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.dropdown-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 8px;
+  height: 6px;
+  margin-left: 6px;
+  transition: transform 0.25s ease;
+  vertical-align: middle;
+  transform: rotate(-90deg);
+}
+
+.dropdown-chevron svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.vestelli-main-menu > li:not(.has-mega):hover > a > .dropdown-chevron,
+.main-menu > li:not(.has-mega):hover > a > .dropdown-chevron,
+.vestelli-main-menu > li.has-mega.is-open > a > .dropdown-chevron,
+.main-menu > li.has-mega.is-open > a > .dropdown-chevron {
+  transform: rotate(0deg);
+}
+
+/* ── Mega menu ── */
+
+/* Mega items need static positioning so the panel spans the full nav width */
+.vestelli-main-menu > li.has-mega,
+.main-menu > li.has-mega {
+  position: static;
+}
+
+/* Mega panel opens via JS .is-open class (not :hover) */
+.vestelli-main-menu > li.has-mega.is-open > .sub-menu,
+.main-menu > li.has-mega.is-open > .sub-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%);
+}
+
+/* Full-width panel – break out of container to span viewport */
+.vestelli-main-menu > li.has-mega > .sub-menu,
+.main-menu > li.has-mega > .sub-menu {
+  position: absolute;
+  left: 50%;
+  right: auto;
+  width: 100vw;
+  transform: translateX(-50%);
+  min-width: 0;
+  background-color: rgba(27, 42, 87, 0.98);
+  border-top: 2px solid rgba(48, 203, 211, 0.25);
+  border-bottom: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  padding: 0;
+}
+
+/* Centered grid container */
+.vestelli-main-menu > li.has-mega > .sub-menu > .kmm-submenu__inner,
+.main-menu > li.has-mega > .sub-menu > .kmm-submenu__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 60px;
+  list-style: none;
+}
+
+/* Column wrapper */
+.vestelli-main-menu > li.has-mega > .sub-menu > .kmm-submenu__inner > li,
+.main-menu > li.has-mega > .sub-menu > .kmm-submenu__inner > li {
+  list-style: none;
+  margin: 0;
+  padding: 0 32px 0 0;
+  border: none;
+}
+
+.vestelli-main-menu > li.has-mega > .sub-menu > .kmm-submenu__inner > li:last-child,
+.main-menu > li.has-mega > .sub-menu > .kmm-submenu__inner > li:last-child {
+  padding-right: 0;
+}
+
+/* Column heading */
+.vestelli-main-menu > li.has-mega > .sub-menu > .kmm-submenu__inner > li > a,
+.main-menu > li.has-mega > .sub-menu > .kmm-submenu__inner > li > a {
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #ffffff;
+  text-decoration: none;
+  display: block;
+  padding: 0 0 10px 0;
+  margin-bottom: 4px;
+  border: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: opacity 0.2s ease;
+}
+
+.vestelli-main-menu > li.has-mega > .sub-menu > .kmm-submenu__inner > li > a:hover,
+.main-menu > li.has-mega > .sub-menu > .kmm-submenu__inner > li > a:hover {
+  opacity: 0.7;
+  background: transparent;
+  padding-left: 0;
+}
+
+/* Inner sub-menu – reset browser defaults */
+.vestelli-main-menu > li.has-mega > .sub-menu > .kmm-submenu__inner > li > .sub-menu,
+.main-menu > li.has-mega > .sub-menu > .kmm-submenu__inner > li > .sub-menu {
+  position: static;
+  list-style: none;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  display: block;
+  padding: 4px 0 0;
+  margin: 0;
+}
+
+/* Kill any bullet/border from the generic sub-menu rule inside mega */
+.vestelli-main-menu > li.has-mega .kmm-submenu__inner li,
+.main-menu > li.has-mega .kmm-submenu__inner li {
+  list-style: none;
+  border-bottom: none;
+}
+
+/* Link items */
+.vestelli-main-menu > li.has-mega > .sub-menu > .kmm-submenu__inner > li > .sub-menu > li > a,
+.main-menu > li.has-mega > .sub-menu > .kmm-submenu__inner > li > .sub-menu > li > a {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0;
+  display: block;
+  padding: 8px 0;
+  background: transparent;
+  transition: opacity 0.2s ease;
+  line-height: 1.4;
+}
+
+.vestelli-main-menu > li.has-mega > .sub-menu > .kmm-submenu__inner > li > .sub-menu > li > a:hover,
+.main-menu > li.has-mega > .sub-menu > .kmm-submenu__inner > li > .sub-menu > li > a:hover {
+  opacity: 0.8;
+  text-decoration: none;
+  background: transparent;
+  padding-left: 0;
+}
+
+/* Placeholder links: no navigation and no hover decoration */
+a.avalon-mega-no-link {
+  cursor: default !important;
+  text-decoration: none !important;
+}
+
+.vestelli-main-menu .sub-menu li:not(.menu-item-has-children) > a.avalon-mega-no-link,
+.main-menu .sub-menu li:not(.menu-item-has-children) > a.avalon-mega-no-link {
+  pointer-events: none;
+}
+
+/* Hamburger Menu Button */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobile-menu-toggle.active {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.hamburger-line {
+  width: 78%;
+  height: 4px;
+  background-color: white;
+  border-radius: 999px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10050;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 85%;
+  max-width: 420px;
+  height: 100dvh;
+  background-color: #1b2a57;
+  z-index: 10060;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
+  padding: 0;
+  box-sizing: border-box;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mobile-menu::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.mobile-menu::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.mobile-menu::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.mobile-menu-overlay.active .mobile-menu {
+  right: 0;
+}
+
+/* Mobile Menu Header */
+.mobile-menu-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 12px 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 50px;
+}
+
+/* Mobile Menu Close Button */
+.mobile-menu-close {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.mobile-menu-close:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: rotate(90deg);
+}
+
+.mobile-menu-close:active {
+  transform: rotate(90deg) scale(0.95);
+}
+
+.mobile-main-menu {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.mobile-main-menu li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 0;
+}
+
+.mobile-main-menu li:last-child {
+  border-bottom: none;
+}
+
+/* Mobile Menu Item Wrapper */
+.mobile-menu-item-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 2rem;
+  gap: 12px;
+}
+
+.mobile-menu-link {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  text-decoration: none;
+  flex: 1;
+  transition: opacity 0.3s ease;
+  line-height: 1.4;
+}
+
+.mobile-menu-link:hover {
+  opacity: 0.8;
+}
+
+.mobile-submenu-toggle {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.mobile-submenu-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-submenu-toggle[aria-expanded="true"] {
+  transform: rotate(180deg);
+}
+
+.mobile-submenu-toggle .dropdown-icon {
+  font-size: 10px;
+  display: block;
+  line-height: 1;
+}
+
+/* Submenu Styles */
+.mobile-main-menu .sub-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.mobile-main-menu .sub-menu.active {
+  max-height: 2000px;
+  padding: 8px 0;
+}
+
+.mobile-main-menu .sub-menu li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  margin: 0;
+}
+
+.mobile-main-menu .sub-menu li:last-child {
+  border-bottom: none;
+}
+
+.mobile-main-menu .sub-menu a {
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  padding: 12px 2rem 12px 3rem;
+  display: block;
+  transition: color 0.3s ease, padding-left 0.3s ease;
+  line-height: 1.4;
+}
+
+.mobile-main-menu .sub-menu a:hover {
+  color: white;
+  padding-left: 3.5rem;
+}
+
+/* Regular menu items (without submenu) */
+.mobile-main-menu > li > a {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  text-decoration: none;
+  padding: 14px 2rem;
+  display: block;
+  transition: opacity 0.3s ease;
+  line-height: 1.4;
+}
+
+.mobile-main-menu > li > a:hover {
+  opacity: 0.8;
+}
+
+/* Mobile Menu Footer */
+.mobile-menu-footer {
+  padding: 20px 2rem 30px 2rem;
+  border-top: 2px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background-color: #1b2a57;
+  margin-top: 5px;
+}
+
+.mobile-language-switcher {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobile-language-switcher a {
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-language-switcher a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.mobile-language-switcher a.current-lang {
+  background-color: rgba(27, 42, 87, 0.3);
+  font-weight: 600;
+}
+
+.mobile-cta-button {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background-color: #1b2a57;
+  padding: 16px 24px;
+  border-radius: 10px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(27, 42, 87, 0.3);
+}
+
+.mobile-cta-button:hover {
+  background-color: #1b2a57;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(27, 42, 87, 0.4);
+}
+
+.mobile-cta-button:active {
+  transform: translateY(0);
+}
+
+.mobile-header-cart {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.mobile-cart-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+  position: relative;
+  padding: 12px;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+  border-radius: 8px;
+}
+
+.mobile-cart-link:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.mobile-cart-link svg {
+  width: 28px;
+  height: 28px;
+}
+
+.mobile-cart-count {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background-color: #1b2a57;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 2px solid #1b2a57;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 1200px) {
+  .vestelli-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .vestelli-header::before {
+    width: 140px;
+  }
+
+  .vestelli-header::after {
+    left: 140px;
+  }
+
+  .vestelli-header-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .vestelli-header-inner {
+    min-height: 72px;
+    align-items: center;
+  }
+
+  .vestelli-header-nav-section {
+    display: none;
+  }
+  
+  .vestelli-header-logo-section {
+    flex: 1 1 auto;
+    max-width: none;
+    min-width: 0;
+    justify-content: flex-start;
+    padding: 10px 14px;
+  }
+
+  .vestelli-custom-logo {
+    max-height: 40px;
+  }
+  
+  .mobile-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: auto;
+    margin-right: 14px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    z-index: 10070;
+    color: #1b2a57;
+    gap: 4px;
+  }
+  
+  .vestelli-header .mobile-menu-toggle .hamburger-line {
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  .mobile-menu {
+    width: min(92vw, 420px);
+    right: min(-92vw, -420px);
+  }
+}
+
+@media (max-width: 640px) {
+  .vestelli-header::before {
+    width: 112px;
+  }
+
+  .vestelli-header::after {
+    left: 112px;
+  }
+
+  .vestelli-header-inner {
+    min-height: 64px;
+  }
+
+  .vestelli-header-logo-section {
+    padding: 8px 10px;
+  }
+
+  .vestelli-custom-logo {
+    max-height: 34px;
+  }
+
+  .mobile-menu-item-wrapper {
+    padding: 12px 1.25rem;
+  }
+
+  .mobile-main-menu > li > a,
+  .mobile-main-menu .sub-menu a {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .mobile-menu-footer {
+    padding: 16px 1.25rem 24px;
+  }
+}
+
+@media (min-width: 1201px) {
+  .mobile-menu-toggle,
+  .mobile-menu-overlay {
+    display: none !important;
+  }
+}

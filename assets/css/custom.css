@@ -1,0 +1,646 @@
+/**
+ * Custom Styles
+ * 
+ * @package Vestelli
+ */
+
+/* ==========================================================================
+   Page Layout
+   ========================================================================== */
+
+/* Content padding so it isn't hidden under absolute header (not on home or BB edit) */
+body:not(.has-transparent-header):not(.home):not(.fl-builder-edit) #fl-main-content {
+  padding-top: 90px;
+}
+
+/* ==========================================================================
+   WooCommerce Categories
+   ========================================================================== */
+.fl-woocommerce-categories img {
+  border: 0 !important;
+  height: 300px;
+  width: 100%;
+  object-fit: contain;
+}
+
+.fl-woocommerce-categories h2 {
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   Help Me Choose Plugin
+   ========================================================================== */
+h3.amv-step-description {
+  padding-bottom: 50px;
+}
+
+/* ==========================================================================
+   WooCommerce Products
+   ========================================================================== */
+.products a picture img {
+  border: none !important;
+}
+
+a.button.product_type_simple {
+  background-color: #002b56 !important;
+  border: none !important;
+  padding: 15px 30px !important;
+  border-radius: 10px !important;
+}
+
+a.button.product_type_simple:hover {
+  background-color: #003d7a !important;
+}
+
+/* ==========================================================================
+   Beaver Builder Post Grid
+   ========================================================================== */
+h3.fl-post-grid-title {
+  margin-top: 20px;
+  margin-bottom: 50px !important;
+}
+
+@media (max-width: 768px) {
+  h3.fl-post-grid-title {
+    margin-bottom: 0px;
+  }
+} 
+
+/* ==========================================================================
+   Beaver Builder Tabs
+   ========================================================================== */
+
+.fl-tabs .fl-tabs-label:focus {
+  outline: none;
+}
+
+div.fl-tabs-panel-content.fl-clearfix.fl-tab-active h2 {
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
+/* ==========================================================================
+   Help Me Choose Plugin Styles
+   ========================================================================== */
+
+span.amv-option-label {
+  color: #012b55;
+}
+
+span.amv-option-description {
+  font-weight: 400;
+}
+
+button.amv-reset-button {
+  color: red;
+}
+
+.amv-rec-gravity-form {
+  width: 700px;
+  margin: auto;
+}
+
+label.amv-option.amv-has-image {
+  background-color: #F6F8F7;
+}
+
+.amv-swiper-pagination {
+  display: none;
+}
+
+/* ==========================================================================
+   WooCommerce Product Gallery
+   ========================================================================== */
+
+/* Remove borders from product images */
+.woocommerce-product-gallery__image,
+.woocommerce-product-gallery__image a,
+.woocommerce-product-gallery__image picture,
+.woocommerce-product-gallery__image img,
+.woocommerce-product-gallery__image .wp-post-image,
+.woocommerce div.product div.images img,
+.woocommerce div.product div.images picture,
+.woocommerce div.product div.images a,
+.woocommerce ul.products li.product img,
+.woocommerce ul.products li.product picture,
+.woocommerce-page ul.products li.product img,
+.woocommerce-page ul.products li.product picture {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Disable hover zoom effect on product images */
+.woocommerce-product-gallery__image img,
+.woocommerce-product-gallery__image picture img,
+.woocommerce-product-gallery__image .wp-post-image {
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Keep pointer cursor for clickable gallery images */
+.woocommerce-product-gallery__image a {
+  cursor: pointer !important;
+}
+
+/* Disable zoom on hover */
+.woocommerce-product-gallery__image:hover img,
+.woocommerce-product-gallery__image:hover picture img,
+.woocommerce-product-gallery__image a:hover img,
+.woocommerce div.product div.images:hover img,
+.woocommerce div.product div.images:hover picture img,
+.woocommerce ul.products li.product:hover img,
+.woocommerce ul.products li.product:hover picture img,
+.woocommerce-page ul.products li.product:hover img,
+.woocommerce-page ul.products li.product:hover picture img {
+  transform: none !important;
+  zoom: 1 !important;
+  scale: 1 !important;
+}
+
+/* Disable WooCommerce zoom plugin functionality */
+.woocommerce-product-gallery__image .zoomImg {
+  display: none !important;
+}
+
+.woocommerce-product-gallery__image .zoomContainer {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Accordion Tables
+   ========================================================================== */
+
+/* Simple table styles within accordion items */
+.accordion-item table,
+.woocommerce-tabs .accordion-item table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+  font-size: 14px;
+}
+
+.accordion-item table th,
+.woocommerce-tabs .accordion-item table th {
+  background-color: #f5f5f5;
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #ddd;
+}
+
+.accordion-item table td,
+.woocommerce-tabs .accordion-item table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.accordion-item table tr:last-child td,
+.woocommerce-tabs .accordion-item table tr:last-child td {
+  border-bottom: none;
+}
+
+.accordion-item table tr:hover,
+.woocommerce-tabs .accordion-item table tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Responsive table styles for mobile */
+@media (max-width: 768px) {
+  .accordion-item table,
+  .woocommerce-tabs .accordion-item table {
+    font-size: 13px;
+  }
+  
+  .accordion-item table th,
+  .accordion-item table td,
+  .woocommerce-tabs .accordion-item table th,
+  .woocommerce-tabs .accordion-item table td {
+    padding: 10px 8px;
+  }
+  
+  /* Stack table on very small screens */
+  @media (max-width: 480px) {
+    .accordion-item table,
+    .woocommerce-tabs .accordion-item table {
+      display: block;
+      width: 100%;
+    }
+    
+    .accordion-item table thead,
+    .woocommerce-tabs .accordion-item table thead {
+      display: none;
+    }
+    
+    .accordion-item table tbody,
+    .woocommerce-tabs .accordion-item table tbody {
+      display: block;
+      width: 100%;
+    }
+    
+    .accordion-item table tr,
+    .woocommerce-tabs .accordion-item table tr {
+      display: block;
+      margin-bottom: 15px;
+      border: 1px solid #e5e5e5;
+      border-radius: 4px;
+      padding: 10px;
+    }
+    
+    .accordion-item table td,
+    .woocommerce-tabs .accordion-item table td {
+      display: block;
+      text-align: right;
+      padding: 8px 10px;
+      border-bottom: 1px solid #e5e5e5;
+      position: relative;
+      padding-left: 50%;
+    }
+    
+    .accordion-item table td:last-child,
+    .woocommerce-tabs .accordion-item table td:last-child {
+      border-bottom: none;
+    }
+    
+    .accordion-item table td:before,
+    .woocommerce-tabs .accordion-item table td:before {
+      content: attr(data-label);
+      position: absolute;
+      left: 10px;
+      width: 45%;
+      text-align: left;
+      font-weight: 600;
+      color: #333;
+    }
+  }
+}
+
+/* ==========================================================================
+   Footer Styles
+   ========================================================================== */
+
+footer a picture img {
+  display: none !important;
+}
+
+footer button.fl-menu-toggle.fl-content-ui-button {
+  display: none !important;
+}
+
+ul.products.columns-1 {
+  margin: 0px !important;
+  padding: 0px !important;
+  text-align: left !important;
+}
+
+ul.products.columns-1 li {
+  margin: 0px !important;
+  margin-bottom: 10px !important;
+  padding: 0px !important;
+  text-align: left !important;
+  font-size: 14px !important;
+}
+
+
+.accordion-content h2 {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Avalon Table - Responsive Table Styles
+   ========================================================================== */
+
+
+.Avalon-table table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  background-color: #ffffff;
+  min-width: 600px; /* Minimum width to prevent too much compression */
+}
+
+.Avalon-table thead {
+  background-color: #012b55;
+  color: #ffffff;
+}
+
+.Avalon-table thead th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.Avalon-table tbody tr {
+  border-bottom: 1px solid #e0e0e0;
+  transition: background-color 0.2s ease;
+}
+
+.Avalon-table tbody tr:hover {
+  background-color: #f6f7f7;
+}
+
+.Avalon-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.Avalon-table tbody td {
+  padding: 12px 16px;
+  color: #333333;
+  vertical-align: top;
+}
+
+.Avalon-table tbody td:first-child {
+  font-weight: 500;
+  color: #012b55;
+}
+
+.Avalon-table tfoot {
+  background-color: #f6f7f7;
+  font-weight: 600;
+}
+
+.Avalon-table tfoot td {
+  padding: 12px 16px;
+  border-top: 2px solid #e0e0e0;
+  color: #012b55;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .Avalon-table {
+    margin: 15px 0;
+  }
+  
+  .Avalon-table table {
+    font-size: 13px;
+    min-width: 500px;
+  }
+  
+  .Avalon-table thead th,
+  .Avalon-table tbody td,
+  .Avalon-table tfoot td {
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .Avalon-table table {
+    font-size: 12px;
+    min-width: 400px;
+  }
+  
+  .Avalon-table thead th,
+  .Avalon-table tbody td,
+  .Avalon-table tfoot td {
+    padding: 8px 10px;
+  }
+  
+  .Avalon-table thead th {
+    font-size: 12px;
+  }
+}
+
+/* Optional: Striped rows */
+.Avalon-table.striped tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.Avalon-table.striped tbody tr:nth-child(even):hover {
+  background-color: #f0f0f0;
+}
+
+/* Optional: Bordered table */
+.Avalon-table.bordered table {
+  border: 1px solid #e0e0e0;
+}
+
+.Avalon-table.bordered tbody td {
+  border-right: 1px solid #e0e0e0;
+}
+
+.Avalon-table.bordered tbody td:last-child {
+  border-right: none;
+}
+
+/* Optional: Compact table */
+.Avalon-table.compact thead th,
+.Avalon-table.compact tbody td,
+.Avalon-table.compact tfoot td {
+  padding: 8px 12px;
+}
+
+/* Optional: Hover effect on rows */
+.Avalon-table.hover-rows tbody tr {
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   Hero Block - Full Width Support
+   ========================================================================== */
+
+/* Ensure Hero block is full width and at the top */
+.wp-block-vestelli-hero,
+.avalon-hero-block {
+  clear: both;
+}
+
+/* Full width alignment - break out of container */
+.wp-block-vestelli-hero.alignfull,
+.avalon-hero-block.alignfull {
+  width: 100vw;
+  max-width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+/* Ensure Hero block content container is 1650px and centered */
+.wp-block-vestelli-hero.alignfull .avalon-hero-content,
+.avalon-hero-block.alignfull .avalon-hero-content {
+  max-width: 1650px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 100vh;
+}
+
+/* Remove container padding when Hero is first block */
+.fl-content-full:has(.wp-block-vestelli-hero:first-child),
+.fl-content-full:has(.avalon-hero-block:first-child) {
+  padding-top: 0;
+}
+
+/* Fallback for browsers that don't support :has() */
+.fl-content-full > .wp-block-vestelli-hero:first-child,
+.fl-content-full > .avalon-hero-block:first-child {
+  margin-top: 0;
+}
+
+/* ==========================================================================
+   Accordion
+   ========================================================================== */
+
+div.fl-accordion-content.fl-clearfix {
+  padding-left: 0px;
+}
+
+/* ==========================================================================
+   Portfolio Content
+   ========================================================================== */
+
+.portoflio-content h2,
+.portoflio-content h3,
+.portoflio-content h4 {
+  font-weight: bold !important;
+  margin-top: 40px !important;
+  margin-bottom: 20px !important;
+}
+
+.portoflio-content .wp-block-buttons {
+  margin-top: 20px !important;
+}
+
+.portoflio-content .wp-block-button a{
+  border-radius: 10px !important;
+  background-color: #012b55 !important;
+}
+
+
+.portoflio-content img {
+  margin-bottom: 20px !important;
+}
+
+/* ==========================================================================
+   Check List
+   ========================================================================== */
+
+.check-list {
+  list-style: none !important;
+  padding-left: 0;
+  margin: 0;
+}
+
+.check-list li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 10px;
+  line-height: 1.6;
+  list-style: none !important;
+  list-style-type: none !important;
+}
+
+.check-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #012b55;
+  font-weight: bold;
+  font-size: 1.2em;
+  line-height: 1.6;
+}
+
+.check-list li::marker {
+  display: none !important;
+  content: "" !important;
+}
+
+/* ==========================================================================
+   Blockquote
+   ========================================================================== */
+
+blockquote {
+  position: relative;
+  padding: 30px 40px;
+  margin: 20px 0 !important;
+  background-color: #F6F7F7;
+  border: none;
+  border-radius: 0px;
+  font-style: italic;
+  color: #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+blockquote p {
+  margin: 0 0 15px 0;
+  position: relative;
+  z-index: 1;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+blockquote cite {
+  display: block;
+  margin-top: 15px;
+  font-size: 0.9em;
+  font-style: normal;
+  color: #666;
+  position: relative;
+  z-index: 1;
+}
+
+blockquote cite::before {
+  content: "— ";
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  blockquote {
+    padding: 20px 25px;
+    margin: 30px 0;
+  }
+  
+  blockquote::before {
+    font-size: 40px;
+    top: 15px;
+    left: 15px;
+  }
+}
+
+/* ==========================================================================
+   Vestelli Artikkelit
+   ========================================================================== */
+.Vestelli-artikkelit .fl-post-image img {
+  height: 300px;
+  object-fit: cover;
+}
+
+.Vestelli-artikkelit .fl-post-image {
+  height: 300px;
+  overflow: hidden;
+}
+
+.Vestelli-artikkelit .fl-post-text {
+  background-color: #1B2A57;
+  color: #fff;
+}
+
+.Vestelli-artikkelit .fl-post-text a {
+  background-color: #1B2A57;
+  color: #fff;
+}
+
+.Vestelli-artikkelit .bottom-squiggly {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  position: absolute;
+  bottom: 20px;
+}
+
+div.avalon-stat-item {
+  height: 360px;
+}
+
+div.fl-post-text {
+  height: 250px;
+}
