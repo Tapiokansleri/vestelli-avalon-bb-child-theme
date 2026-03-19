@@ -207,7 +207,7 @@ do_action( 'fl_body_open' );
 									</svg>
 								</button>
 								<form role="search" method="get" class="vestelli-header-search-overlay-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-									<input type="search" placeholder="<?php esc_attr_e( 'Hae...', 'vestelli-avalon' ); ?>" value="<?php echo get_search_query(); ?>" name="s" />
+									<input type="search" placeholder="<?php esc_attr_e( 'Hae...', 'vestelli-avalon' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" name="s" />
 									<button type="submit"><?php esc_html_e( 'Hae', 'vestelli-avalon' ); ?></button>
 								</form>
 							</div>

@@ -144,6 +144,24 @@ add_filter( 'body_class', function( $classes ) {
 } );
 
 /**
+ * Convert hex color to rgba string.
+ */
+function va_hex_to_rgba( $hex, $opacity ) {
+  if ( empty( $hex ) || ! is_string( $hex ) ) {
+    $hex = '#000000';
+  }
+  $hex = str_replace( '#', '', $hex );
+  if ( strlen( $hex ) !== 6 ) {
+    $hex = '000000';
+  }
+  $r = absint( hexdec( substr( $hex, 0, 2 ) ) );
+  $g = absint( hexdec( substr( $hex, 2, 2 ) ) );
+  $b = absint( hexdec( substr( $hex, 4, 2 ) ) );
+  $opacity = max( 0.0, min( 1.0, floatval( $opacity ) ) );
+  return "rgba($r, $g, $b, $opacity)";
+}
+
+/**
  * Disable WooCommerce zoom via JavaScript params (but keep gallery functionality)
  */
 add_filter( 'woocommerce_single_product_params', function( $params ) {

@@ -71,30 +71,7 @@ function vestelli_render_hero_block( $attributes, $content, $block ) {
   $button2_open_new_tab = isset( $attributes['button2OpenNewTab'] ) ? (bool) $attributes['button2OpenNewTab'] : false;
   
   // Convert hex color to rgba for overlay
-  if ( ! function_exists( 'avalon_hex_to_rgba' ) ) {
-    function avalon_hex_to_rgba( $hex, $opacity ) {
-      if ( empty( $hex ) || ! is_string( $hex ) ) {
-        $hex = '#000000';
-      }
-      $hex = str_replace( '#', '', $hex );
-      if ( strlen( $hex ) !== 6 ) {
-        $hex = '000000';
-      }
-      $r = absint( hexdec( substr( $hex, 0, 2 ) ) );
-      $g = absint( hexdec( substr( $hex, 2, 2 ) ) );
-      $b = absint( hexdec( substr( $hex, 4, 2 ) ) );
-      $opacity = floatval( $opacity );
-      if ( $opacity < 0 ) {
-        $opacity = 0;
-      }
-      if ( $opacity > 1 ) {
-        $opacity = 1;
-      }
-      return "rgba($r, $g, $b, $opacity)";
-    }
-  }
-  
-  $overlay_rgba = avalon_hex_to_rgba( $overlay_color, $overlay_opacity );
+  $overlay_rgba = va_hex_to_rgba( $overlay_color, $overlay_opacity );
   
   // Build wrapper attributes
   $wrapper_class = 'avalon-hero-block wp-block-vestelli-hero';

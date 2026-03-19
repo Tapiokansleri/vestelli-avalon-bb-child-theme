@@ -34,6 +34,9 @@ $includes = array(
   'mobile-tabs-accordion.php', // Mobile tabs accordion functionality
 );
 
+// GitHub release-based auto-updater
+require_once VA_INC . '/github-updater.php';
+
 foreach ( $includes as $file ) {
   $file_path = VA_INC . '/' . $file;
   if ( file_exists( $file_path ) ) {
