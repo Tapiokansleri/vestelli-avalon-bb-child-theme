@@ -6,7 +6,7 @@
 
 
 .avalon-nordic-header {
-  background-color: #012B55;
+  background-color: var(--va-brand-color);
   width: 100%;
   padding: 0;
   position: fixed;
@@ -184,7 +184,7 @@ body:not(.admin-bar) .avalon-nordic-header {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #012B55;
+  background-color: var(--va-brand-color);
   min-width: 320px;
   list-style: none;
   margin: 0;
@@ -196,7 +196,7 @@ body:not(.admin-bar) .avalon-nordic-header {
   transition: all 0.3s ease;
   z-index: 9998;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  border-top: 2px solid rgba(48, 203, 211, 0.3);
+  border-top: 2px solid rgba(var(--va-accent-rgb), 0.3);
 }
 
 /* Top-level submenus: non-mega items open on li:hover, mega items via JS .is-open */
@@ -255,8 +255,8 @@ body:not(.admin-bar) .avalon-nordic-header {
   right: 0;
   width: 100%;
   min-width: 0;
-  background-color: #012B55;
-  border-top: 2px solid rgba(48, 203, 211, 0.3);
+  background-color: var(--va-brand-color);
+  border-top: 2px solid rgba(var(--va-accent-rgb), 0.3);
   border-bottom: none;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   padding: 0;
@@ -389,7 +389,7 @@ a.avalon-mega-no-link {
 }
 
 .language-switcher select option {
-  background-color: #012B55;
+  background-color: var(--va-brand-color);
   color: white;
 }
 
@@ -424,12 +424,13 @@ a.avalon-mega-no-link {
   right: 0;
   width: 320px;
   padding: 12px;
-  background: #012B55;
+  background: var(--va-brand-color);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
+  border-radius: var(--va-button-radius);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transform: translateY(-6px);
   transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
   z-index: 10010;
@@ -438,6 +439,7 @@ a.avalon-mega-no-link {
 .header-search-dropdown.active {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
   transform: translateY(0);
 }
 
@@ -465,7 +467,7 @@ a.avalon-mega-no-link {
 
 .header-search-input:focus {
   outline: none;
-  border-color: #30CBD3;
+  border-color: var(--va-accent-color);
 }
 
 .header-search-submit {
@@ -473,7 +475,7 @@ a.avalon-mega-no-link {
   padding: 0 14px;
   border: none;
   border-radius: 8px;
-  background: #30CBD3;
+  background: var(--va-accent-color);
   color: #fff;
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
@@ -483,7 +485,7 @@ a.avalon-mega-no-link {
 }
 
 .header-search-submit:hover {
-  background: #28b5bd;
+  background: var(--va-accent-color-hover);
 }
 
 /* CTA Button */
@@ -492,9 +494,9 @@ a.avalon-mega-no-link {
   font-size: 14px;
   font-weight: 500;
   color: white;
-  background-color: #30CBD3;
+  background-color: var(--va-accent-color);
   padding: 8px 20px;
-  border-radius: 10px;
+  border-radius: var(--va-button-radius);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -507,7 +509,7 @@ a.avalon-mega-no-link {
 }
 
 .cta-button:hover {
-  background-color: #28b5bd;
+  background-color: var(--va-accent-color-hover);
   color: white;
   text-decoration: none !important;
 }
@@ -530,7 +532,7 @@ a.avalon-mega-no-link {
   position: absolute;
   top: -8px;
   right: -8px;
-  background-color: #30CBD3;
+  background-color: var(--va-accent-color);
   color: white;
   font-family: 'Roboto', sans-serif;
   font-size: 11px;
@@ -610,7 +612,7 @@ a.avalon-mega-no-link {
   width: 85%;
   max-width: 420px;
   height: 100vh;
-  background-color: #012B55;
+  background-color: var(--va-brand-color);
   z-index: 1000;
   overflow-y: auto;
   overflow-x: hidden;
@@ -813,7 +815,7 @@ a.avalon-mega-no-link {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  background-color: #012B55;
+  background-color: var(--va-brand-color);
   margin-top: 5px;
 }
 
@@ -841,7 +843,7 @@ a.avalon-mega-no-link {
 }
 
 .mobile-language-switcher a.current-lang {
-  background-color: rgba(48, 203, 211, 0.3);
+  background-color: rgba(var(--va-accent-rgb), 0.3);
   font-weight: 600;
 }
 
@@ -850,23 +852,23 @@ a.avalon-mega-no-link {
   font-size: 16px;
   font-weight: 600;
   color: white;
-  background-color: #30CBD3;
+  background-color: var(--va-accent-color);
   padding: 16px 24px;
-  border-radius: 10px;
+  border-radius: var(--va-button-radius);
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 2px 8px rgba(48, 203, 211, 0.3);
+  box-shadow: 0 2px 8px rgba(var(--va-accent-rgb), 0.3);
 }
 
 .mobile-cta-button:hover {
-  background-color: #28b5bd;
+  background-color: var(--va-accent-color-hover);
   color: white;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(48, 203, 211, 0.4);
+  box-shadow: 0 4px 12px rgba(var(--va-accent-rgb), 0.4);
 }
 
 .mobile-cta-button:active {
@@ -906,7 +908,7 @@ a.avalon-mega-no-link {
   position: absolute;
   top: 4px;
   right: 4px;
-  background-color: #30CBD3;
+  background-color: var(--va-accent-color);
   color: white;
   font-family: 'Roboto', sans-serif;
   font-size: 11px;
@@ -918,7 +920,7 @@ a.avalon-mega-no-link {
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  border: 2px solid #012B55;
+  border: 2px solid var(--va-brand-color);
 }
 
 /* Responsive - Mobile Menu */

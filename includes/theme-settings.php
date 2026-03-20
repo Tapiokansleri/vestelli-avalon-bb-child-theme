@@ -46,6 +46,15 @@ add_filter( 'option_va_logo', function( $value ) {
  * Register settings
  */
 add_action( 'admin_init', function() {
+  register_setting( 'va_settings', 'va_brand_color', array(
+    'sanitize_callback' => 'sanitize_hex_color',
+  ) );
+  register_setting( 'va_settings', 'va_accent_color', array(
+    'sanitize_callback' => 'sanitize_hex_color',
+  ) );
+  register_setting( 'va_settings', 'va_button_radius', array(
+    'sanitize_callback' => 'absint',
+  ) );
   register_setting( 'va_settings', 'va_header_design' );
   register_setting( 'va_settings', 'va_enable_portfolio' );
   register_setting( 'va_settings', 'va_logo' );
@@ -65,6 +74,14 @@ add_action( 'admin_init', function() {
   register_setting( 'va_settings', 'va_show_cart' );
   register_setting( 'va_settings', 'va_custom_scripts', array(
     'sanitize_callback' => 'va_sanitize_custom_scripts',
+  ) );
+  register_setting( 'va_settings', 'va_quote_mode' );
+  register_setting( 'va_settings', 'va_hide_prices' );
+  register_setting( 'va_settings', 'va_quote_button_text', array(
+    'sanitize_callback' => 'sanitize_text_field',
+  ) );
+  register_setting( 'va_settings', 'va_quote_email', array(
+    'sanitize_callback' => 'sanitize_email',
   ) );
   
   add_settings_section(
@@ -179,6 +196,37 @@ add_action( 'admin_init', function() {
   );
   
   add_settings_section(
+    'va_colors_section',
+    __( 'Värit', 'vestelli-avalon' ),
+    'va_colors_section_callback',
+    'va-settings'
+  );
+
+  add_settings_field(
+    'va_brand_color',
+    __( 'Brändiväri', 'vestelli-avalon' ),
+    'va_brand_color_field_callback',
+    'va-settings',
+    'va_colors_section'
+  );
+
+  add_settings_field(
+    'va_accent_color',
+    __( 'Korostusväri', 'vestelli-avalon' ),
+    'va_accent_color_field_callback',
+    'va-settings',
+    'va_colors_section'
+  );
+
+  add_settings_field(
+    'va_button_radius',
+    __( 'Painikkeiden reunan pyöristys', 'vestelli-avalon' ),
+    'va_button_radius_field_callback',
+    'va-settings',
+    'va_colors_section'
+  );
+
+  add_settings_section(
     'va_social_section',
     __( 'Sosiaalinen media', 'vestelli-avalon' ),
     'va_social_section_callback',
@@ -203,6 +251,46 @@ add_action( 'admin_init', function() {
     'va_custom_scripts_callback',
     'va-settings',
     'va_scripts_section'
+  );
+
+  // WooCommerce quote mode section
+  add_settings_section(
+    'va_woocommerce_section',
+    __( 'WooCommerce', 'vestelli-avalon' ),
+    'va_woocommerce_section_callback',
+    'va-settings'
+  );
+
+  add_settings_field(
+    'va_quote_mode',
+    __( 'Tarjouspyyntötila', 'vestelli-avalon' ),
+    'va_quote_mode_callback',
+    'va-settings',
+    'va_woocommerce_section'
+  );
+
+  add_settings_field(
+    'va_hide_prices',
+    __( 'Piilota hinnat', 'vestelli-avalon' ),
+    'va_hide_prices_callback',
+    'va-settings',
+    'va_woocommerce_section'
+  );
+
+  add_settings_field(
+    'va_quote_button_text',
+    __( 'Painikkeen teksti', 'vestelli-avalon' ),
+    'va_quote_button_text_callback',
+    'va-settings',
+    'va_woocommerce_section'
+  );
+
+  add_settings_field(
+    'va_quote_email',
+    __( 'Tarjouspyyntöjen sähköposti', 'vestelli-avalon' ),
+    'va_quote_email_callback',
+    'va-settings',
+    'va_woocommerce_section'
   );
 });
 
@@ -580,6 +668,47 @@ function va_show_cart_callback() {
 }
 
 /**
+ * Colors section callback
+ */
+function va_colors_section_callback() {
+  echo '<p>' . __( 'Sivuston brändivärit. Väriä käytetään painikkeissa, taulukoiden otsikoissa, portfoliossa ym.', 'vestelli-avalon' ) . '</p>';
+}
+
+/**
+ * Brand color field callback
+ */
+function va_brand_color_field_callback() {
+  $color = get_option( 'va_brand_color', '#012b55' );
+  ?>
+  <input type="text" name="va_brand_color" value="<?php echo esc_attr( $color ); ?>" class="va-color-picker" data-default-color="#012b55" />
+  <p class="description"><?php _e( 'Valitse sivuston pääväri. Käytetään painikkeissa, taulukoissa, portfoliossa ja muissa elementeissä. Oletus: #012b55', 'vestelli-avalon' ); ?></p>
+  <?php
+}
+
+/**
+ * Accent color field callback
+ */
+function va_accent_color_field_callback() {
+  $color = get_option( 'va_accent_color', '#30CBD3' );
+  ?>
+  <input type="text" name="va_accent_color" value="<?php echo esc_attr( $color ); ?>" class="va-color-picker" data-default-color="#30CBD3" />
+  <p class="description"><?php _e( 'Korostusväri CTA-painikkeille, ostoskori-badgeille ja hakukenttien korostuksille. Oletus: #30CBD3', 'vestelli-avalon' ); ?></p>
+  <?php
+}
+
+/**
+ * Button radius field callback
+ */
+function va_button_radius_field_callback() {
+  $radius = get_option( 'va_button_radius', '10' );
+  ?>
+  <input type="number" name="va_button_radius" value="<?php echo esc_attr( $radius ); ?>" min="0" max="50" step="1" class="small-text" />
+  <span>px</span>
+  <p class="description"><?php _e( 'Painikkeiden reunojen pyöristys pikseleinä. 0 = suorakulmainen, 50 = täysin pyöreä. Oletus: 10px', 'vestelli-avalon' ); ?></p>
+  <?php
+}
+
+/**
  * Social section callback
  */
 function va_social_section_callback() {
@@ -604,6 +733,69 @@ function va_social_linkedin_callback() {
 function va_social_youtube_callback() {
   $url = get_option( 'va_social_youtube', '' );
   echo '<input type="url" name="va_social_youtube" value="' . esc_url( $url ) . '" class="regular-text" placeholder="https://youtube.com/..." />';
+}
+
+/**
+ * WooCommerce section callback
+ */
+function va_woocommerce_section_callback() {
+  echo '<p>' . __( 'Tarjouspyyntötila ja WooCommerce-asetukset. Kun tarjouspyyntötila on päällä, asiakkaat voivat pyytää tarjousta ostamisen sijaan.', 'vestelli-avalon' ) . '</p>';
+}
+
+function va_quote_mode_callback() {
+  $value = get_option( 'va_quote_mode', '0' );
+  ?>
+  <label>
+    <input type="checkbox" name="va_quote_mode" id="va_quote_mode" value="1" <?php checked( $value, '1' ); ?> />
+    <?php _e( 'Ota tarjouspyyntötila käyttöön', 'vestelli-avalon' ); ?>
+  </label>
+  <p class="description"><?php _e( 'Kun päällä, ostoskori toimii tarjouspyyntölomakkeena ilman maksua.', 'vestelli-avalon' ); ?></p>
+  <script>
+  jQuery(document).ready(function($) {
+    function toggleQuoteFields() {
+      var isQuoteMode = $('#va_quote_mode').is(':checked');
+      $('#va_hide_prices_wrapper, #va_quote_button_text_wrapper, #va_quote_email_wrapper').toggle(isQuoteMode);
+    }
+    $('#va_quote_mode').on('change', toggleQuoteFields);
+    toggleQuoteFields();
+  });
+  </script>
+  <?php
+}
+
+function va_hide_prices_callback() {
+  $value = get_option( 'va_hide_prices', '0' );
+  $quote_mode = get_option( 'va_quote_mode', '0' );
+  ?>
+  <div id="va_hide_prices_wrapper" <?php echo $quote_mode !== '1' ? 'style="display:none;"' : ''; ?>>
+    <label>
+      <input type="checkbox" name="va_hide_prices" value="1" <?php checked( $value, '1' ); ?> />
+      <?php _e( 'Piilota kaikki hinnat sivustolta', 'vestelli-avalon' ); ?>
+    </label>
+  </div>
+  <?php
+}
+
+function va_quote_button_text_callback() {
+  $value = get_option( 'va_quote_button_text', 'Pyydä tarjous' );
+  $quote_mode = get_option( 'va_quote_mode', '0' );
+  ?>
+  <div id="va_quote_button_text_wrapper" <?php echo $quote_mode !== '1' ? 'style="display:none;"' : ''; ?>>
+    <input type="text" name="va_quote_button_text" value="<?php echo esc_attr( $value ); ?>" class="regular-text" />
+    <p class="description"><?php _e( 'Teksti joka näytetään "Lisää ostoskoriin" -painikkeen sijaan. WPML-käännettävä.', 'vestelli-avalon' ); ?></p>
+  </div>
+  <?php
+}
+
+function va_quote_email_callback() {
+  $value = get_option( 'va_quote_email', get_option( 'admin_email' ) );
+  $quote_mode = get_option( 'va_quote_mode', '0' );
+  ?>
+  <div id="va_quote_email_wrapper" <?php echo $quote_mode !== '1' ? 'style="display:none;"' : ''; ?>>
+    <input type="email" name="va_quote_email" value="<?php echo esc_attr( $value ); ?>" class="regular-text" />
+    <p class="description"><?php _e( 'Sähköpostiosoite johon tarjouspyynnöt lähetetään.', 'vestelli-avalon' ); ?></p>
+  </div>
+  <?php
 }
 
 /**
@@ -668,9 +860,16 @@ function va_settings_page() {
  * Enqueue media uploader scripts
  */
 add_action( 'admin_enqueue_scripts', function( $hook ) {
-  if ( 'appearance_page_vestelli-settings' !== $hook ) {
+  if ( 'appearance_page_va-settings' !== $hook ) {
     return;
   }
-  
+
   wp_enqueue_media();
+  wp_enqueue_style( 'wp-color-picker' );
+  wp_enqueue_script( 'wp-color-picker' );
+  wp_add_inline_script( 'wp-color-picker', "
+    jQuery(document).ready(function($) {
+      $('.va-color-picker').wpColorPicker();
+    });
+  " );
 });

@@ -7,7 +7,7 @@
  * @package Vestelli_Avalon
  * @author Tapio Kauranen
  * @author URI https://kansleri.fi
- * @version 1.0
+ * @version 1.1
  */
 if ( ! defined( 'ABSPATH' ) ) {
   exit; // Exit if accessed directly.
@@ -30,6 +30,7 @@ $includes = array(
   'gutenberg-blocks.php',     // Register Gutenberg blocks
   'custom-post-types.php',    // Custom post types
   'custom-functions.php',     // Custom theme functions
+  'woocommerce-quote-mode.php', // WooCommerce quote request mode
   'shortcodes.php',           // Custom shortcodes
   'mobile-tabs-accordion.php', // Mobile tabs accordion functionality
 );

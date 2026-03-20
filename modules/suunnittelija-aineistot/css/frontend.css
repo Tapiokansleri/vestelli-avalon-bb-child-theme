@@ -1,0 +1,127 @@
+/**
+ * Frontend CSS for Suunnittelija-aineistot module
+ *
+ * @package Vestelli
+ */
+
+.sa-aineistot-wrap {
+	width: 100%;
+}
+
+.sa-product-section {
+	margin-bottom: 3rem;
+}
+
+.sa-product-section:last-child {
+	margin-bottom: 0;
+}
+
+.sa-product-title {
+	font-size: 26px;
+	font-weight: bold;
+	color: var(--va-brand-color, #012b55);
+	margin: 0 0 0.25rem 0;
+}
+
+.sa-product-subtitle {
+	font-size: 15px;
+	color: var(--va-accent-color, #30CBD3);
+	margin: 0 0 0.25rem 0;
+	font-weight: 500;
+}
+
+.sa-product-description {
+	font-size: 15px;
+	color: #555;
+	margin: 0 0 1rem 0;
+}
+
+/* Table layout */
+.sa-files-table {
+	width: 100%;
+}
+
+.sa-files-header {
+	display: flex;
+	align-items: center;
+	padding: 0.5rem 1rem;
+	font-size: 13px;
+	font-weight: 600;
+	color: #333;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.sa-files-row {
+	display: flex;
+	align-items: center;
+	padding: 0.75rem 1rem;
+	background: #f7f7f7;
+	border-bottom: 1px solid #eee;
+	transition: background 0.15s ease;
+}
+
+.sa-files-row:hover {
+	background: #f0f0f0;
+}
+
+.sa-file-name-col {
+	flex: 1;
+	font-size: 15px;
+	color: #333;
+}
+
+.sa-file-icon-col {
+	width: 50px;
+	text-align: center;
+	flex-shrink: 0;
+}
+
+.sa-files-header .sa-file-icon-col {
+	font-size: 12px;
+	color: #555;
+}
+
+/* Download icon */
+.sa-download-icon {
+	width: 20px;
+	height: 20px;
+	color: var(--va-brand-color, #012b55);
+	transition: color 0.15s ease;
+}
+
+.sa-files-row a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+}
+
+.sa-files-row a:hover .sa-download-icon {
+	color: var(--va-accent-color, #30CBD3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.sa-product-title {
+		font-size: 22px;
+	}
+
+	.sa-files-header,
+	.sa-files-row {
+		padding: 0.5rem 0.75rem;
+	}
+
+	.sa-file-name-col {
+		font-size: 14px;
+	}
+
+	.sa-file-icon-col {
+		width: 40px;
+	}
+
+	.sa-download-icon {
+		width: 18px;
+		height: 18px;
+	}
+}

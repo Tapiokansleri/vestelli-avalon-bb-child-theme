@@ -235,7 +235,7 @@ do_action( 'fl_body_open' );
 				$opacity = get_option( 'va_header_opacity', '80' );
 				$opacity = max( 0, min( 100, intval( $opacity ) ) );
 				$opacity_decimal = $opacity / 100;
-				$header_style = ' style="background: rgba(1, 43, 85, ' . esc_attr( $opacity_decimal ) . ');"';
+				$header_style = ' style="background: rgba(var(--va-brand-rgb), ' . esc_attr( $opacity_decimal ) . ');"';
 			}
 		?>
 		<header id="avalon-nordic-header" class="<?php echo esc_attr( $header_classes ); ?>"<?php echo $header_style; ?>>

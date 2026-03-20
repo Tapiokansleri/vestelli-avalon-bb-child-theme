@@ -41,5 +41,7 @@ add_action( 'init', function() {
     require_once VESTELLI_MODULES . '/woocommerce-osastot/woocommerce-osastot.php';
     // Register Vestelli lukuina module
     require_once VESTELLI_MODULES . '/stats-numbers/stats-numbers.php';
+    // Register Suunnittelija-aineistot module
+    require_once VESTELLI_MODULES . '/suunnittelija-aineistot/suunnittelija-aineistot.php';
   }
 }, 1);

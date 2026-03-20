@@ -1,8 +1,13 @@
 /**
  * Custom Styles
- * 
+ *
  * @package Vestelli
  */
+
+/* Restore icon animation on BB buttons — BB outputs transition:none on button children */
+.fl-button.fl-button-icon-animation i {
+  transition: all 0.2s ease-out !important;
+}
 
 /* ==========================================================================
    Page Layout
@@ -42,14 +47,14 @@ h3.amv-step-description {
 }
 
 a.button.product_type_simple {
-  background-color: #002b56 !important;
+  background-color: var(--va-brand-color) !important;
   border: none !important;
   padding: 15px 30px !important;
-  border-radius: 10px !important;
+  border-radius: var(--va-button-radius) !important;
 }
 
 a.button.product_type_simple:hover {
-  background-color: #003d7a !important;
+  background-color: var(--va-brand-color-hover) !important;
 }
 
 /* ==========================================================================
@@ -84,7 +89,7 @@ div.fl-tabs-panel-content.fl-clearfix.fl-tab-active h2 {
    ========================================================================== */
 
 span.amv-option-label {
-  color: #012b55;
+  color: var(--va-brand-color);
 }
 
 span.amv-option-description {
@@ -323,7 +328,7 @@ ul.products.columns-1 li {
 }
 
 .Avalon-table thead {
-  background-color: #012b55;
+  background-color: var(--va-brand-color);
   color: #ffffff;
 }
 
@@ -358,7 +363,7 @@ ul.products.columns-1 li {
 
 .Avalon-table tbody td:first-child {
   font-weight: 500;
-  color: #012b55;
+  color: var(--va-brand-color);
 }
 
 .Avalon-table tfoot {
@@ -369,7 +374,7 @@ ul.products.columns-1 li {
 .Avalon-table tfoot td {
   padding: 12px 16px;
   border-top: 2px solid #e0e0e0;
-  color: #012b55;
+  color: var(--va-brand-color);
 }
 
 /* Responsive styles */
@@ -492,6 +497,34 @@ div.fl-accordion-content.fl-clearfix {
   padding-left: 0px;
 }
 
+.fl-accordion-content.fl-clearfix h2 {
+  font-weight: bold;
+  font-size: 30px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.fl-accordion-content.fl-clearfix h3 {
+  font-weight: bold;
+  font-size: 25px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .fl-accordion-content.fl-clearfix h2 {
+    font-size: 22px;
+    margin-top: 28px;
+    margin-bottom: 14px;
+  }
+
+  .fl-accordion-content.fl-clearfix h3 {
+    font-size: 19px;
+    margin-top: 28px;
+    margin-bottom: 14px;
+  }
+}
+
 /* ==========================================================================
    Portfolio Content
    ========================================================================== */
@@ -509,8 +542,8 @@ div.fl-accordion-content.fl-clearfix {
 }
 
 .portoflio-content .wp-block-button a{
-  border-radius: 10px !important;
-  background-color: #012b55 !important;
+  border-radius: var(--va-button-radius) !important;
+  background-color: var(--va-brand-color) !important;
 }
 
 
@@ -542,7 +575,7 @@ div.fl-accordion-content.fl-clearfix {
   position: absolute;
   left: 0;
   top: 0;
-  color: #012b55;
+  color: var(--va-brand-color);
   font-weight: bold;
   font-size: 1.2em;
   line-height: 1.6;
@@ -621,12 +654,12 @@ blockquote cite::before {
 }
 
 .Vestelli-artikkelit .fl-post-text {
-  background-color: #1B2A57;
+  background-color: var(--va-brand-color);
   color: #fff;
 }
 
 .Vestelli-artikkelit .fl-post-text a {
-  background-color: #1B2A57;
+  background-color: var(--va-brand-color);
   color: #fff;
 }
 
@@ -643,4 +676,16 @@ div.avalon-stat-item {
 
 div.fl-post-text {
   height: 250px;
+}
+
+/* ==========================================================================
+   WooCommerce Quote Mode
+   ========================================================================== */
+
+body.va-quote-mode.va-hide-prices .woocommerce .price,
+body.va-quote-mode.va-hide-prices .woocommerce .amount,
+body.va-quote-mode.va-hide-prices .woocommerce-Price-amount,
+body.va-quote-mode.va-hide-prices .woocommerce-variation-price,
+body.va-quote-mode.va-hide-prices .cart_totals .order-total {
+  display: none !important;
 }

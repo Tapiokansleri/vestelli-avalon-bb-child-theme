@@ -130,6 +130,14 @@ add_filter( 'body_class', function( $classes ) {
   $design = get_option( 'va_header_design', 'avalon' );
   $classes[] = 'header-design-' . sanitize_html_class( $design );
 
+  // Quote mode body classes
+  if ( function_exists( 'va_is_quote_mode' ) && va_is_quote_mode() ) {
+    $classes[] = 'va-quote-mode';
+    if ( function_exists( 'va_hide_prices' ) && va_hide_prices() ) {
+      $classes[] = 'va-hide-prices';
+    }
+  }
+
   // Transparent header support (Avalon design)
   if ( is_page() && ! is_front_page() ) {
     $page_template = get_page_template_slug();
@@ -160,6 +168,46 @@ function va_hex_to_rgba( $hex, $opacity ) {
   $opacity = max( 0.0, min( 1.0, floatval( $opacity ) ) );
   return "rgba($r, $g, $b, $opacity)";
 }
+
+/**
+ * Output brand CSS custom properties.
+ */
+add_action( 'wp_head', function() {
+  $brand = get_option( 'va_brand_color', '#012b55' );
+  if ( empty( $brand ) ) {
+    $brand = '#012b55';
+  }
+  $accent = get_option( 'va_accent_color', '#30CBD3' );
+  if ( empty( $accent ) ) {
+    $accent = '#30CBD3';
+  }
+  $radius = absint( get_option( 'va_button_radius', '10' ) );
+
+  // Helper: hex → r,g,b integers.
+  $to_rgb = function ( $hex ) {
+    $hex = ltrim( $hex, '#' );
+    return array(
+      hexdec( substr( $hex, 0, 2 ) ),
+      hexdec( substr( $hex, 2, 2 ) ),
+      hexdec( substr( $hex, 4, 2 ) ),
+    );
+  };
+
+  // Brand hover: ~15% lighter.
+  list( $br, $bg, $bb ) = $to_rgb( $brand );
+  $brand_hover = sprintf( '#%02x%02x%02x', min( 255, $br + 25 ), min( 255, $bg + 25 ), min( 255, $bb + 25 ) );
+
+  // Accent hover: ~10% darker.
+  list( $ar, $ag, $ab ) = $to_rgb( $accent );
+  $accent_hover = sprintf( '#%02x%02x%02x', max( 0, $ar - 15 ), max( 0, $ag - 15 ), max( 0, $ab - 15 ) );
+
+  printf(
+    "<style>:root{--va-brand-color:%s;--va-brand-color-hover:%s;--va-brand-rgb:%d,%d,%d;--va-accent-color:%s;--va-accent-color-hover:%s;--va-accent-rgb:%d,%d,%d;--va-button-radius:%dpx;}</style>\n",
+    $brand, $brand_hover, $br, $bg, $bb,
+    $accent, $accent_hover, $ar, $ag, $ab,
+    $radius
+  );
+}, 5 );
 
 /**
  * Disable WooCommerce zoom via JavaScript params (but keep gallery functionality)
