@@ -1,60 +1,123 @@
 <?php
 /**
- * Frontend template for Avalon Button
- * 
- * @package Vestelli
+ * Frontend template for Shop now and back button
+ *
+ * @package Vestelli_Avalon
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-  exit; // Exit if accessed directly.
+  exit;
 }
 
-// Get layout settings
+// Get current product
+global $post;
+$product = null;
+if ( function_exists( 'wc_get_product' ) && $post ) {
+  $product = wc_get_product( $post->ID );
+}
+
+// Layout
 $alignment = ! empty( $settings->alignment ) ? esc_attr( $settings->alignment ) : 'left';
-$show_second_button = isset( $settings->show_second_button ) && $settings->show_second_button === 'yes';
 
-// First button settings
-$button_text = ! empty( $settings->button_text ) ? esc_html( $settings->button_text ) : 'Pyydä tarjous';
-$button_url = ! empty( $settings->button_url ) ? esc_url( $settings->button_url ) : '/pyyda-tarjous';
-$open_new_tab = isset( $settings->open_new_tab ) && $settings->open_new_tab === 'yes' ? '_blank' : '_self';
-$button_style = ! empty( $settings->button_style ) ? esc_attr( $settings->button_style ) : 'default';
+// Shop / Quote button
+$is_quote_mode = function_exists( 'va_is_quote_mode' ) && va_is_quote_mode();
 
-// Second button settings
-$button2_text = ! empty( $settings->button2_text ) ? esc_html( $settings->button2_text ) : 'Painikkeen teksti';
-$button2_url = ! empty( $settings->button2_url ) ? esc_url( $settings->button2_url ) : '#';
-$button2_open_new_tab = isset( $settings->button2_open_new_tab ) && $settings->button2_open_new_tab === 'yes' ? '_blank' : '_self';
-$button2_style = ! empty( $settings->button2_style ) ? esc_attr( $settings->button2_style ) : 'default';
+if ( $is_quote_mode ) {
+  $shop_text = ! empty( $settings->quote_label ) ? $settings->quote_label : '';
+  if ( empty( $shop_text ) && function_exists( 'va_get_quote_button_text' ) ) {
+    $shop_text = va_get_quote_button_text();
+  }
+  if ( empty( $shop_text ) ) {
+    $shop_text = 'Pyydä tarjous';
+  }
+} else {
+  $shop_text = ! empty( $settings->shop_label ) ? $settings->shop_label : 'Lisää ostoskoriin';
+}
 
-// Build wrapper classes
+$shop_style = ! empty( $settings->shop_style ) ? esc_attr( $settings->shop_style ) : 'default';
+
+// Build add-to-cart URL
+$shop_url = '#';
+if ( $product ) {
+  $shop_url = $product->add_to_cart_url();
+}
+
+// Back button
+$show_back = isset( $settings->show_back_button ) ? $settings->show_back_button === 'yes' : true;
+$back_text = ! empty( $settings->back_label ) ? $settings->back_label : 'Takaisin tuoteryhmän tuotteisiin';
+$back_style = ! empty( $settings->back_style ) ? esc_attr( $settings->back_style ) : 'light-blue';
+
+// Get the product's primary category URL
+$back_url = '';
+if ( $product && $show_back ) {
+  $terms = get_the_terms( $post->ID, 'product_cat' );
+  if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+    // Prefer the deepest (most specific) category, skip "Uncategorized"
+    $best_term = null;
+    foreach ( $terms as $term ) {
+      if ( $term->slug === 'uncategorized' || $term->slug === 'ei-kategoriaa' ) {
+        continue;
+      }
+      if ( ! $best_term || $term->parent > 0 ) {
+        $best_term = $term;
+      }
+    }
+    if ( ! $best_term && ! empty( $terms ) ) {
+      $best_term = $terms[0];
+    }
+    if ( $best_term ) {
+      $back_url = get_term_link( $best_term );
+      if ( is_wp_error( $back_url ) ) {
+        $back_url = '';
+      }
+    }
+  }
+  // Fallback to shop page
+  if ( empty( $back_url ) ) {
+    $back_url = get_permalink( wc_get_page_id( 'shop' ) );
+  }
+}
+
+// Wrapper classes
 $wrapper_classes = array( 'avalon-button-wrapper', 'avalon-button-align-' . $alignment );
-if ( $show_second_button ) {
+if ( $show_back ) {
   $wrapper_classes[] = 'avalon-button-has-two';
 }
-$wrapper_class = implode( ' ', $wrapper_classes );
-
-// Build first button classes
-$button_classes = array( 'avalon-button', 'avalon-button-' . $button_style );
-$button_class = implode( ' ', $button_classes );
-
-// Build second button classes
-$button2_classes = array( 'avalon-button', 'avalon-button-' . $button2_style );
-$button2_class = implode( ' ', $button2_classes );
 ?>
 
-<div class="<?php echo $wrapper_class; ?>">
-  <a href="<?php echo $button_url; ?>" 
-     target="<?php echo $open_new_tab; ?>"
-     class="<?php echo $button_class; ?>"
-     rel="<?php echo $open_new_tab === '_blank' ? 'noopener noreferrer' : ''; ?>">
-    <span class="avalon-button-text"><?php echo $button_text; ?></span>
-  </a>
-  
-  <?php if ( $show_second_button ) : ?>
-    <a href="<?php echo $button2_url; ?>" 
-       target="<?php echo $button2_open_new_tab; ?>"
-       class="<?php echo $button2_class; ?>"
-       rel="<?php echo $button2_open_new_tab === '_blank' ? 'noopener noreferrer' : ''; ?>">
-      <span class="avalon-button-text"><?php echo $button2_text; ?></span>
+<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>">
+  <?php
+    $can_add = $product && $product->is_type( 'simple' ) && $product->is_in_stock()
+               && ( $product->is_purchasable() || $is_quote_mode );
+  ?>
+  <?php if ( $can_add ) :
+    // In quote mode without price, build the add-to-cart URL manually
+    $add_url = $is_quote_mode && ! $product->is_purchasable()
+      ? add_query_arg( 'add-to-cart', $product->get_id(), wc_get_cart_url() )
+      : $shop_url;
+  ?>
+    <a href="<?php echo esc_url( $add_url ); ?>"
+       data-product_id="<?php echo esc_attr( $product->get_id() ); ?>"
+       data-quantity="1"
+       class="avalon-button avalon-button-<?php echo $shop_style; ?> add_to_cart_button<?php echo $product->is_purchasable() ? ' ajax_add_to_cart' : ''; ?>"
+       aria-label="<?php echo esc_attr( $shop_text ); ?>">
+      <span class="avalon-button-text"><?php echo esc_html( $shop_text ); ?></span>
+    </a>
+  <?php elseif ( $product ) : ?>
+    <a href="<?php echo esc_url( $product->get_permalink() ); ?>"
+       class="avalon-button avalon-button-<?php echo $shop_style; ?>">
+      <span class="avalon-button-text"><?php echo esc_html( $shop_text ); ?></span>
+    </a>
+  <?php else : ?>
+    <span class="avalon-button avalon-button-<?php echo $shop_style; ?>">
+      <span class="avalon-button-text"><?php echo esc_html( $shop_text ); ?></span>
+    </span>
+  <?php endif; ?>
+
+  <?php if ( $show_back && ! empty( $back_url ) ) : ?>
+    <a href="<?php echo esc_url( $back_url ); ?>"
+       class="avalon-button avalon-button-<?php echo $back_style; ?>">
+      <span class="avalon-button-text"><?php echo esc_html( $back_text ); ?></span>
     </a>
   <?php endif; ?>
 </div>

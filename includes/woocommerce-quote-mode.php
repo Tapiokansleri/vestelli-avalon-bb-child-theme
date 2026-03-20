@@ -129,23 +129,204 @@ add_filter( 'woocommerce_get_order_item_totals', function( $rows ) {
   return $rows;
 }, 9999 );
 
-// CSS fallback for cached pages.
+// CSS fallback for cached pages + hide price columns and totals.
 add_action( 'wp_head', function() {
   if ( ! va_hide_prices() ) {
     return;
   }
   ?>
   <style>
+    /* Product prices everywhere */
     .woocommerce .price,
     .woocommerce .amount,
     .woocommerce-Price-amount,
     .widget .price,
     .widget .amount,
-    .cart_totals .order-total,
     .woocommerce-variation-price { display: none !important; }
+
+    /* Cart table: hide price & subtotal columns (header + cells) */
+    .woocommerce-cart-form table.shop_table th.product-price,
+    .woocommerce-cart-form table.shop_table td.product-price,
+    .woocommerce-cart-form table.shop_table th.product-subtotal,
+    .woocommerce-cart-form table.shop_table td.product-subtotal { display: none !important; }
+
+    /* Cart totals: hide price rows but keep the checkout button */
+    .cart_totals .shop_table { display: none !important; }
+    .cart_totals h2 { display: none !important; }
+
+    /* Checkout order review: hide price & total columns */
+    .woocommerce-checkout-review-order-table th:last-child,
+    .woocommerce-checkout-review-order-table td:last-child,
+    .woocommerce-checkout-review-order-table tfoot { display: none !important; }
+
+    /* Order received / thank-you page */
+    .woocommerce-order-overview__total,
+    .woocommerce-table--order-details tfoot,
+    .woocommerce-table--order-details th:last-child,
+    .woocommerce-table--order-details td:last-child { display: none !important; }
   </style>
   <?php
 }, 99 );
+
+// Checkout page layout & form styling in quote mode.
+add_action( 'wp_head', function() {
+  if ( ! va_is_quote_mode() ) {
+    return;
+  }
+  ?>
+  <style>
+    /* ── Checkout layout ── */
+
+    /* Align col-2 (Lisätiedot / Tilauksen kommentit) to the top */
+    .woocommerce-checkout .col2-set {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+    .woocommerce-checkout .col2-set .col-1,
+    .woocommerce-checkout .col2-set .col-2 {
+      flex: 1 1 45%;
+      min-width: 300px;
+    }
+    .woocommerce-checkout .col2-set .col-1 {
+      padding-right: 30px;
+    }
+
+    /* ── Unified form field styling ── */
+    .woocommerce-checkout .form-row input.input-text,
+    .woocommerce-checkout .form-row textarea,
+    .woocommerce-checkout .form-row select,
+    .woocommerce-checkout .select2-container .select2-selection--single {
+      font-size: 15px !important;
+      padding: 10px 12px !important;
+      border: 1px solid #ccc !important;
+      border-radius: 6px !important;
+      background: #fff !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      font-family: inherit !important;
+      line-height: 1.4 !important;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+    /* Native select arrow */
+    .woocommerce-checkout .form-row select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23333' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-position: right 12px center !important;
+      padding-right: 36px !important;
+    }
+    /* Select2 dropdown override */
+    .woocommerce-checkout .select2-container .select2-selection--single {
+      height: 42px !important;
+      min-height: 42px !important;
+      max-height: 42px !important;
+      display: flex !important;
+      align-items: center !important;
+      border: 1px solid #ccc !important;
+      border-radius: 6px !important;
+      background: #fff !important;
+      padding: 0 !important;
+    }
+    .woocommerce-checkout .select2-container .select2-selection__rendered {
+      padding: 0 12px !important;
+      line-height: 42px !important;
+      font-size: 15px !important;
+      color: #333 !important;
+    }
+    .woocommerce-checkout .select2-container .select2-selection__arrow {
+      height: 42px !important;
+      right: 8px !important;
+    }
+    /* Textarea match */
+    .woocommerce-checkout #order_comments,
+    .woocommerce-checkout .form-row textarea {
+      font-size: 15px !important;
+      padding: 10px 12px !important;
+      border: 1px solid #ccc !important;
+      border-radius: 6px !important;
+      background: #fff !important;
+      font-family: inherit !important;
+      line-height: 1.4 !important;
+    }
+
+    /* Consistent label styling */
+    .woocommerce-checkout .form-row label {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 4px;
+      display: block;
+      color: #333;
+    }
+
+    /* Consistent spacing between fields */
+    .woocommerce-checkout .form-row {
+      margin-bottom: 16px;
+    }
+
+    /* Order notes textarea */
+    .woocommerce-checkout #order_comments {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    /* Section headings */
+    .woocommerce-checkout h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0 0 20px;
+      color: #002b56;
+    }
+
+    /* ── Order review table cleanup ── */
+    .woocommerce-checkout-review-order-table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .woocommerce-checkout-review-order-table th,
+    .woocommerce-checkout-review-order-table td {
+      padding: 10px 12px;
+      font-size: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    /* Submit button */
+    .woocommerce-checkout #place_order {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: 8px;
+      background-color: #002b56;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+    }
+    .woocommerce-checkout #place_order:hover {
+      background-color: #003d7a;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .woocommerce-checkout .col2-set .col-1,
+      .woocommerce-checkout .col2-set .col-2 {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+  <?php
+}, 100 );
+
+// Allow products without a price to be purchasable in quote mode.
+add_filter( 'woocommerce_is_purchasable', function( $purchasable, $product ) {
+  if ( va_is_quote_mode() && ! $purchasable && $product->get_price() === '' ) {
+    return true;
+  }
+  return $purchasable;
+}, 9999, 2 );
 
 // ─── B. Replace Button Text ─────────────────────────────────────────────────
 
