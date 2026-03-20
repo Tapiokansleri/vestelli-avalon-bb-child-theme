@@ -7,7 +7,7 @@
  * @package Vestelli_Avalon
  * @author Tapio Kauranen
  * @author URI https://kansleri.fi
- * @version 1.1
+ * @version 1.2
  */
 if ( ! defined( 'ABSPATH' ) ) {
   exit; // Exit if accessed directly.
