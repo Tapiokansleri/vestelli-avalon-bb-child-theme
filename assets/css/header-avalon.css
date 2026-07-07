@@ -787,8 +787,23 @@ a.avalon-mega-no-link {
   transition: opacity 0.2s ease;
 }
 
-.mobile-menu-link:hover {
-  opacity: 0.8;
+.mobile-menu-link:hover,
+.mobile-menu-link:focus,
+.mobile-menu-link:active {
+  color: #fff;
+  opacity: 1;
+}
+
+.mobile-menu-item-wrapper:hover,
+.mobile-menu-item-wrapper:focus-within {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Override BB theme global link hover (brand color on brand background) */
+.mobile-menu a:hover,
+.mobile-menu a:focus,
+.mobile-menu a:active {
+  color: #fff;
 }
 
 /* ── Per-level overrides: indent staircase + font step-down ── */
