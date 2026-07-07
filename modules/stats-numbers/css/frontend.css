@@ -5,7 +5,7 @@
  */
 
 .avalon-stats-wrapper {
-  width: 65%;
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   padding: 36px 0 20px;
@@ -215,7 +215,6 @@ h2.avalon-stats-title:after {
 
 @media (max-width: 768px) {
   .avalon-stats-wrapper {
-    width: 92%;
     padding: 0;
   }
 
