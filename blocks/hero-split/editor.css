@@ -1,0 +1,34 @@
+/**
+ * Hero Split Block Editor Styles
+ *
+ * @package Vestelli
+ */
+
+.wp-block-vestelli-hero-split.va-hero-split {
+	position: relative;
+	overflow: hidden;
+}
+
+.wp-block-vestelli-hero-split .va-hero-split__content > .block-editor-inner-blocks {
+	width: 100%;
+}
+
+.wp-block-vestelli-hero-split .va-hero-split__col {
+	padding: 12px;
+	border: 1px dashed rgba(255, 255, 255, 0.25);
+	border-radius: 6px;
+	min-height: 80px;
+}
+
+.wp-block-vestelli-hero-split .va-hero-split__col:hover {
+	border-color: rgba(255, 255, 255, 0.55);
+}
+
+/* When no background image is set, give a subtle dark preview so light text is readable in editor */
+.wp-block-vestelli-hero-split.va-hero-split--no-bg::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: #1d2433;
+	z-index: 0;
+}

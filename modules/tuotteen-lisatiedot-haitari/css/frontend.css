@@ -1,0 +1,79 @@
+/**
+ * Frontend CSS for Tuotteen lisätiedot haitari module
+ * 
+ * @package Vestelli
+ */
+
+.tuotteen-lisatiedot-accordion {
+  width: 100%;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.accordion-item:first-child {
+  border-top: 1px solid #e0e0e0;
+}
+
+.accordion-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: #4B4B4B;
+  transition: color 0.3s ease;
+}
+
+.accordion-title {
+  flex: 1;
+  font-size: 16px;
+  font-weight: bold;
+  color: #4B4B4B;
+}
+
+.accordion-icon {
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1;
+  transition: transform 0.3s ease;
+  margin-left: 1rem;
+  color: #4B4B4B;
+}
+
+.accordion-item.open .accordion-icon {
+  transform: rotate(45deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding: 0;
+}
+
+.accordion-item.open .accordion-content {
+  max-height: 2000px;
+  padding-bottom: 1rem;
+}
+
+.accordion-inner {
+  padding-top: 0.5rem;
+  color: #4B4B4B;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.6;
+}
+
+.accordion-inner p {
+  margin-bottom: 0.75rem;
+}
+
+.accordion-inner p:last-child {
+  margin-bottom: 0;
+}

@@ -1,0 +1,44 @@
+/**
+ * Hero Block Editor Styles
+ * 
+ * @package Vestelli
+ */
+
+/* Editor preview styles match frontend */
+.wp-block-vestelli-hero {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  overflow: hidden;
+  min-height: 60vh;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Full width alignment in editor */
+.wp-block-vestelli-hero.alignfull {
+  width: 100vw;
+  max-width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+/* Wide alignment in editor */
+.wp-block-vestelli-hero.alignwide {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ensure content container is 1650px and centered */
+.wp-block-vestelli-hero.alignfull .avalon-hero-content {
+  max-width: 1650px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 100vh;
+}

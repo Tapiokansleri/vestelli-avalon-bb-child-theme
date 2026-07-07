@@ -1,0 +1,66 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "vestelli/hero-split",
+  "title": "Hero (Split)",
+  "category": "vestelli",
+  "icon": "align-pull-left",
+  "description": "Two-column hero with flexible blocks in each column and an optional background image.",
+  "keywords": ["hero", "banner", "split", "columns", "two", "cta"],
+  "textdomain": "vestelli",
+  "editorScript": "file:./editor.js",
+  "editorStyle": "file:./editor.css",
+  "style": "file:./style.css",
+  "render": "file:./render.php",
+  "attributes": {
+    "backgroundImageId": {
+      "type": "number",
+      "default": 0
+    },
+    "backgroundImageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "overlayColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "overlayOpacity": {
+      "type": "number",
+      "default": 0.4
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "minHeight": {
+      "type": "string",
+      "default": "70vh"
+    },
+    "verticalAlign": {
+      "type": "string",
+      "default": "center"
+    },
+    "leftWidth": {
+      "type": "number",
+      "default": 50
+    },
+    "columnGap": {
+      "type": "string",
+      "default": "48px"
+    },
+    "stackOnMobile": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"],
+    "anchor": true,
+    "spacing": {
+      "padding": true,
+      "margin": true
+    }
+  }
+}

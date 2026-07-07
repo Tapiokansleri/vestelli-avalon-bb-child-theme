@@ -1,0 +1,80 @@
+/**
+ * Suunnittelija-aineistot Block Editor Styles
+ *
+ * @package Vestelli
+ */
+
+.wp-block-vestelli-aineistot__placeholder {
+	border: 2px dashed #c0c4ca;
+	background: #f6f7f7;
+	padding: 2rem;
+	text-align: center;
+	border-radius: 4px;
+}
+
+.wp-block-vestelli-aineistot__placeholder p {
+	margin: 0 0 0.5rem 0;
+	font-weight: 600;
+}
+
+.wp-block-vestelli-aineistot__hint {
+	color: #5a6772;
+	font-weight: 400 !important;
+}
+
+.va-aineistot-section-actions,
+.va-aineistot-row-actions {
+	display: flex;
+	gap: 0.25rem;
+	flex-wrap: wrap;
+	margin: 0.5rem 0;
+}
+
+.va-aineistot-divider {
+	border: 0;
+	border-top: 1px solid #e0e0e0;
+	margin: 1rem 0 0.5rem;
+}
+
+.va-aineistot-files-label {
+	margin-bottom: 0.5rem;
+}
+
+.va-aineistot-file-row {
+	background: #f6f7f7;
+	padding: 0.75rem;
+	border-radius: 4px;
+	margin-bottom: 0.5rem;
+}
+
+.va-aineistot-file-row__title {
+	font-size: 12px;
+	color: #5a6772;
+	margin-bottom: 0.25rem;
+}
+
+.va-aineistot-empty {
+	color: #5a6772;
+	font-style: italic;
+	margin: 0.25rem 0 0.75rem;
+}
+
+.va-aineistot-ie-section {
+	margin-bottom: 0.5rem;
+}
+
+.va-aineistot-ie-section > strong {
+	display: block;
+	margin-bottom: 0.5rem;
+}
+
+.va-aineistot-ie-help {
+	font-size: 12px;
+	color: #5a6772;
+	margin: 0 0 0.5rem;
+}
+
+.va-aineistot-ie-section textarea {
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	font-size: 12px;
+}

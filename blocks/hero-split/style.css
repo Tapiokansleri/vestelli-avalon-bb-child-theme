@@ -1,0 +1,94 @@
+/**
+ * Hero Split Block Frontend Styles
+ *
+ * @package Vestelli
+ */
+
+.va-hero-split {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	box-sizing: border-box;
+	display: flex;
+	align-items: var(--va-hero-align, center);
+	padding: 80px 2rem;
+}
+
+.va-hero-split.alignfull {
+	width: 100vw;
+	max-width: 100vw;
+	margin-left: calc(50% - 50vw);
+	margin-right: calc(50% - 50vw);
+}
+
+.va-hero-split.alignwide {
+	max-width: 1400px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.va-hero-split__bg {
+	position: absolute;
+	inset: 0;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	z-index: 1;
+}
+
+.va-hero-split__overlay {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+}
+
+.va-hero-split__content {
+	position: relative;
+	z-index: 3;
+	width: 100%;
+	max-width: 1400px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: var(--va-hero-left, 50%) var(--va-hero-right, 50%);
+	gap: var(--va-hero-gap, 48px);
+	align-items: var(--va-hero-align, center);
+	box-sizing: border-box;
+}
+
+.va-hero-split__col {
+	min-width: 0;
+}
+
+.va-hero-split__col > .block-editor-inner-blocks,
+.va-hero-split__col > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	min-width: 0;
+}
+
+/* Headings, paragraphs and links inherit text color when no explicit color set */
+.va-hero-split,
+.va-hero-split h1,
+.va-hero-split h2,
+.va-hero-split h3,
+.va-hero-split h4,
+.va-hero-split h5,
+.va-hero-split h6,
+.va-hero-split p {
+	color: inherit;
+}
+
+@media (max-width: 900px) {
+	.va-hero-split {
+		padding: 64px 1.5rem;
+	}
+
+	.va-hero-split--stack-mobile .va-hero-split__content {
+		grid-template-columns: 1fr;
+		gap: 40px;
+	}
+}
+
+@media (max-width: 480px) {
+	.va-hero-split {
+		padding: 48px 1rem;
+	}
+}

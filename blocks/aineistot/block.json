@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "vestelli/aineistot",
+  "title": "Suunnittelija-aineistot",
+  "category": "vestelli",
+  "icon": "media-document",
+  "description": "Tuotteiden latausmateriaalit (PDF/DWG) osioittain.",
+  "keywords": ["aineistot", "lataa", "pdf", "dwg", "dokumentit"],
+  "textdomain": "vestelli",
+  "editorScript": "file:./editor.js",
+  "editorStyle": "file:./editor.css",
+  "style": "file:./style.css",
+  "render": "file:./render.php",
+  "attributes": {
+    "sections": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "heading": { "type": "string" },
+          "text": { "type": "string" },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "pdfUrl": { "type": "string" },
+                "dwgUrl": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"],
+    "spacing": {
+      "padding": true,
+      "margin": true
+    }
+  }
+}

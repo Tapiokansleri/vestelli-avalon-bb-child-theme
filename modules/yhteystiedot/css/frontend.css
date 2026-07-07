@@ -1,0 +1,185 @@
+/**
+ * Yhteystiedot Module Styles
+ *
+ * @package Vestelli_Avalon
+ */
+
+.vy-yhteystiedot {
+	width: 100%;
+}
+
+.vy-empty {
+	padding: 24px;
+	text-align: center;
+	color: #666;
+	font-style: italic;
+}
+
+/* ---- Section ---- */
+.vy-section {
+	margin-bottom: 64px;
+}
+
+.vy-section:last-child {
+	margin-bottom: 0;
+}
+
+.vy-section__title {
+	position: relative;
+	margin: 0 auto 56px;
+	text-align: center;
+	font-family: 'Oxygen', 'Helvetica Neue', Arial, sans-serif;
+	font-size: 36px;
+	font-weight: 700;
+	color: var(--va-brand-color, #012b55);
+	letter-spacing: 0.01em;
+}
+
+/* Wave decoration under the section title */
+.vy-section__title::after {
+	content: '';
+	position: absolute;
+	left: 50%;
+	bottom: -22px;
+	transform: translateX(-50%);
+	width: 132px;
+	height: 18px;
+	background: url('/wp-content/uploads/2026/03/element_wave_03-scaled.png') no-repeat center center;
+	background-size: contain;
+	opacity: 0.85;
+}
+
+/* ---- Grid ---- */
+.vy-grid {
+	display: grid;
+	gap: 40px 24px;
+	grid-template-columns: repeat(var(--vy-cols, 4), 1fr);
+}
+
+.vy-cols-2 .vy-grid { --vy-cols: 2; }
+.vy-cols-3 .vy-grid { --vy-cols: 3; }
+.vy-cols-4 .vy-grid { --vy-cols: 4; }
+
+/* ---- Card ---- */
+.vy-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	padding: 0;
+}
+
+.vy-card__photo {
+	width: 160px;
+	height: 160px;
+	border-radius: 50%;
+	overflow: hidden;
+	background-color: #f3f4f6;
+	margin-bottom: 18px;
+	flex-shrink: 0;
+}
+
+.vy-card__photo img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.vy-card__photo--grayscale img {
+	filter: grayscale(100%);
+}
+
+.vy-card__photo--placeholder {
+	background: linear-gradient(135deg, #eef2f7 0%, #d9dfe8 100%);
+}
+
+.vy-card__name {
+	margin: 0 0 4px;
+	font-family: 'Oxygen', 'Helvetica Neue', Arial, sans-serif;
+	font-size: 17px;
+	font-weight: 700;
+	color: var(--va-brand-color, #012b55);
+	line-height: 1.3;
+}
+
+.vy-card__title {
+	margin: 0 0 10px;
+	font-family: 'Oxygen', 'Helvetica Neue', Arial, sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--va-brand-color, #012b55);
+	line-height: 1.4;
+}
+
+.vy-card__phone,
+.vy-card__email {
+	margin: 0 0 4px;
+	font-family: 'Oxygen', 'Helvetica Neue', Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+.vy-card__phone a,
+.vy-card__email a {
+	color: var(--va-accent-color, #00ADEE);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.vy-card__phone {
+	color: var(--va-accent-color, #00ADEE);
+}
+
+.vy-card__phone a:hover,
+.vy-card__email a:hover {
+	color: var(--va-brand-color, #012b55);
+	text-decoration: underline;
+}
+
+.vy-card__email {
+	word-break: break-word;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+	.vy-cols-4 .vy-grid { --vy-cols: 3; }
+}
+
+@media (max-width: 768px) {
+	.vy-section__title {
+		font-size: 30px;
+		margin-bottom: 48px;
+	}
+
+	.vy-cols-3 .vy-grid,
+	.vy-cols-4 .vy-grid {
+		--vy-cols: 2;
+	}
+
+	.vy-card__photo {
+		width: 130px;
+		height: 130px;
+	}
+}
+
+@media (max-width: 480px) {
+	.vy-section__title {
+		font-size: 26px;
+	}
+
+	.vy-cols-2 .vy-grid,
+	.vy-cols-3 .vy-grid,
+	.vy-cols-4 .vy-grid {
+		--vy-cols: 2;
+	}
+
+	.vy-grid {
+		gap: 28px 16px;
+	}
+
+	.vy-card__photo {
+		width: 110px;
+		height: 110px;
+	}
+}
