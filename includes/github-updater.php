@@ -15,13 +15,48 @@ class VA_GitHub_Updater {
 
   private $theme_slug = 'vestelli-avalon';
   private $github_repo = 'Tapiokansleri/vestelli-avalon-bb-child-theme';
-  private $transient_key = 'va_github_update_check';
+  private $transient_key = 'va_github_update_check_v001';
   private $cache_hours = 12;
 
   public function __construct() {
     add_filter( 'pre_set_site_transient_update_themes', array( $this, 'check_for_update' ) );
     add_filter( 'themes_api', array( $this, 'theme_info' ), 10, 3 );
     add_action( 'upgrader_process_complete', array( $this, 'clear_cache' ), 10, 2 );
+    add_action( 'admin_init', array( $this, 'clear_legacy_caches' ), 1 );
+  }
+
+  /**
+   * Drop stale update data from before the 0.01 versioning reset.
+   */
+  public function clear_legacy_caches() {
+    delete_transient( 'va_github_update_check' );
+
+    $current_version = wp_get_theme( $this->theme_slug )->get( 'Version' );
+    $remote          = $this->get_remote_version();
+    $update_themes   = get_site_transient( 'update_themes' );
+
+    if ( ! is_object( $update_themes ) || empty( $update_themes->response[ $this->theme_slug ] ) ) {
+      return;
+    }
+
+    $offered_version = $update_themes->response[ $this->theme_slug ]['new_version'] ?? '';
+
+    // Remove stale offers from the old 1.x line after the 0.01 reset.
+    $stale_legacy_offer = (
+      $offered_version
+      && preg_match( '/^1\./', $offered_version )
+      && preg_match( '/^0\./', $current_version )
+    );
+
+    $already_current = (
+      $remote
+      && version_compare( $current_version, $remote['version'], '>=' )
+    );
+
+    if ( $stale_legacy_offer || $already_current ) {
+      unset( $update_themes->response[ $this->theme_slug ] );
+      set_site_transient( 'update_themes', $update_themes );
+    }
   }
 
   /**
@@ -42,6 +77,8 @@ class VA_GitHub_Updater {
         'url'         => $remote['url'],
         'package'     => $remote['zip_url'],
       );
+    } elseif ( isset( $transient->response[ $this->theme_slug ] ) ) {
+      unset( $transient->response[ $this->theme_slug ] );
     }
 
     return $transient;
