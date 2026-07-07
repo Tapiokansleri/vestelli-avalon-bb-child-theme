@@ -49,6 +49,27 @@ To create a release:
 2. Tag the commit: `git tag v0.02`
 3. Push the tag: `git push origin v0.02`
 4. Create a release on GitHub from the tag
+5. Add a new entry to the changelog below
+
+## Changelog
+
+= 0.01 =
+* Release date: July 7, 2026
+* Initial release of the Avalon and Vestelli unified child theme
+* Dual header design (Vestelli two-tone and Avalon Nordic single-color) via theme settings
+* Mega menu with 3-level navigation and full-width dropdown panel
+* Gutenberg blocks: Hero, Hero Split, and Aineistot
+* Beaver Builder modules for products, forms, testimonials, stats, departments, and contact info
+* WooCommerce support with cart icon, quote request mode, and checkout styling
+* WPML language switcher in header
+* Optional Portfolio custom post type with Project Type taxonomy
+* Mobile menu overlay with sub-menu accordion
+* Transparent header page template
+* Contact page template (Ota yhteyttä)
+* GitHub release-based auto-updater
+* Flat menu styling for Avalon headers without dropdown items
+* Conditional header search toggle
+* Legacy Salient `[nectar_btn]` shortcode suppression for old product content
 
 ## License
 
