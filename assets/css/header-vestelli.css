@@ -457,6 +457,17 @@ body.header-design-vestelli {
   padding-top: 0;
 }
 
+/* Clear the overlay Vestelli header on sidebar template pages */
+body.header-design-vestelli.page-template-tpl-sidebar .fl-page-content {
+  padding-top: 120px;
+}
+
+@media (max-width: 640px) {
+  body.header-design-vestelli.page-template-tpl-sidebar .fl-page-content {
+    padding-top: 94px;
+  }
+}
+
 /* Submenu styles for vestelli (shared with legacy) */
 .vestelli-main-menu > li > .sub-menu,
 .main-menu > li > .sub-menu {
@@ -1115,97 +1126,7 @@ a.avalon-mega-no-link {
   border: 2px solid var(--va-brand-color);
 }
 
-/* Responsive - Mobile */
-@media (max-width: 1400px) {
-  .vestelli-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-
-  .vestelli-header::before {
-    width: 140px;
-  }
-
-  .vestelli-header::after {
-    left: 140px;
-  }
-
-  .vestelli-header-container {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .vestelli-header-inner {
-    min-height: 72px;
-    align-items: center;
-  }
-
-  .vestelli-header-nav-section {
-    display: none;
-  }
-  
-  .vestelli-header-logo-section {
-    flex: 1 1 auto;
-    max-width: none;
-    min-width: 0;
-    justify-content: flex-start;
-    padding: 10px 14px;
-  }
-
-  .vestelli-custom-logo {
-    max-height: 40px;
-  }
-  
-  .mobile-menu-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-left: auto;
-    margin-right: 14px;
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    min-height: 44px;
-    z-index: 10070;
-    color: var(--va-brand-color);
-    gap: 4px;
-  }
-  
-  .vestelli-header .mobile-menu-toggle .hamburger-line {
-    background-color: #fff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-  }
-
-  .mobile-menu {
-    width: min(92vw, 420px);
-    right: min(-92vw, -420px);
-  }
-}
-
-@media (min-width: 1401px) and (max-width: 1560px) {
-  .vestelli-header-nav-section {
-    padding: 14px 20px 14px 16px;
-  }
-
-  .vestelli-header-main-row,
-  .vestelli-header-extras {
-    gap: 10px;
-  }
-
-  .vestelli-main-menu > li > a {
-    padding: 10px 10px;
-    font-size: 10px;
-    letter-spacing: 0.5px;
-  }
-
-  .vestelli-cta-button {
-    padding: 0 16px;
-    font-size: 11px;
-  }
-}
+/* Responsive - Mobile layout is injected from theme settings (va_header_mobile_breakpoint). */
 
 @media (max-width: 640px) {
   .vestelli-header::before {
@@ -1240,12 +1161,5 @@ a.avalon-mega-no-link {
 
   .mobile-menu-footer {
     padding: 16px 1.25rem 24px;
-  }
-}
-
-@media (min-width: 1401px) {
-  .mobile-menu-toggle,
-  .mobile-menu-overlay {
-    display: none !important;
   }
 }

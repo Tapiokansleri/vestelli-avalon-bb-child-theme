@@ -53,6 +53,14 @@ To create a release:
 
 ## Changelog
 
+= 0.04 =
+* Release date: July 8, 2026
+* Shared mobile menu breakpoint setting for both Vestelli and Avalon header designs
+* Dynamic responsive CSS for Avalon header (replaces hardcoded 1200px breakpoint)
+* Reorganized Teeman asetukset page with tabbed sections (Header, Brändi, Some, WooCommerce, Scriptit)
+* Centralized admin conditional field visibility for header type, design, Themer, and quote mode
+* Renamed breakpoint option to `va_header_mobile_breakpoint` with backward compatibility
+
 = 0.03 =
 * Release date: July 8, 2026
 * Enable GitHub theme update checks on local WordPress environments

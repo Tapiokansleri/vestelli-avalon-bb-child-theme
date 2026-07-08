@@ -1,0 +1,40 @@
+.va-settings-wrap .nav-tab-wrapper {
+  margin-bottom: 0;
+}
+
+.va-settings-tab-panel {
+  display: none;
+  background: #fff;
+  border: 1px solid #c3c4c7;
+  border-top: 0;
+  padding: 16px 20px 8px;
+  margin-bottom: 20px;
+}
+
+.va-settings-tab-panel.is-active {
+  display: block;
+}
+
+.va-settings-tab-panel > h2 {
+  display: none;
+}
+
+.va-settings-tab-panel .form-table th {
+  width: 220px;
+}
+
+.va-settings-subheading-row th {
+  padding-top: 24px;
+  padding-bottom: 8px;
+}
+
+.va-settings-subheading-row h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.va-settings-field-spacer td {
+  padding: 0;
+  border: 0;
+}

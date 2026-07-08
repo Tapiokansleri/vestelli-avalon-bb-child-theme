@@ -7,7 +7,7 @@
  * @package Vestelli_Avalon
  * @author Tapio Kauranen
  * @author URI https://kansleri.fi
- * @version 0.03
+ * @version 0.04
  */
 if ( ! defined( 'ABSPATH' ) ) {
   exit; // Exit if accessed directly.
@@ -38,6 +38,7 @@ $includes = array(
 
 // GitHub release-based auto-updater
 require_once VA_INC . '/github-updater.php';
+require_once VA_INC . '/header-responsive-css.php';
 
 foreach ( $includes as $file ) {
   $file_path = VA_INC . '/' . $file;

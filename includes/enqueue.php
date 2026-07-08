@@ -57,6 +57,12 @@ add_action( 'wp_enqueue_scripts', function() {
     file_exists( $header_css_path ) ? filemtime( $header_css_path ) : wp_get_theme()->get( 'Version' )
   );
 
+  $responsive_css = ( $design === 'vestelli' )
+    ? va_get_vestelli_header_responsive_css()
+    : va_get_avalon_header_responsive_css();
+
+  wp_add_inline_style( 'va-header', $responsive_css );
+
   // Enqueue header scroll JavaScript
   wp_enqueue_script(
     'va-header-scroll',
@@ -73,6 +79,14 @@ add_action( 'wp_enqueue_scripts', function() {
     array(),
     wp_get_theme()->get( 'Version' ),
     true
+  );
+
+  wp_localize_script(
+    'va-mobile-menu',
+    'vaMobileMenu',
+    array(
+      'headerBreakpoint' => va_get_header_mobile_breakpoint(),
+    )
   );
 
   // Disable WooCommerce product image zoom via JavaScript (but keep gallery functionality)

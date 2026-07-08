@@ -237,7 +237,9 @@
       });
     }
 
-    var desktopBreakpoint = document.getElementById('vestelli-header') ? 1400 : 1200;
+    var desktopBreakpoint = window.vaMobileMenu && vaMobileMenu.headerBreakpoint
+      ? parseInt(vaMobileMenu.headerBreakpoint, 10)
+      : 1200;
 
     window.addEventListener('resize', function() {
       if (window.innerWidth > desktopBreakpoint && menuToggle.classList.contains('active')) {
