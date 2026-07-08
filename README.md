@@ -53,6 +53,15 @@ To create a release:
 
 ## Changelog
 
+= 0.02 =
+* Release date: July 8, 2026
+* Fix theme settings checkboxes not saving when unchecked (header visibility toggles, WooCommerce options, portfolio toggle)
+* Fix logo preview in theme settings on HTTP/local sites by matching the site URL scheme instead of forcing HTTPS
+* Add social icon support to the Avalon header (previously Vestelli only)
+* Prevent Vestelli desktop header from wrapping menu items onto a second row
+* Raise Vestelli mobile menu breakpoint to 1400px when the desktop nav no longer fits on one line
+* Remove arbitrary 65% width constraint from the stats numbers module wrapper
+
 = 0.01 =
 * Release date: July 7, 2026
 * Initial release of the Avalon and Vestelli unified child theme

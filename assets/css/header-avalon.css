@@ -151,7 +151,7 @@ body:not(.admin-bar) .avalon-nordic-header {
   padding: 10px 10px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0;
   transition: opacity 0.3s ease;
   white-space: nowrap;
 }
@@ -435,6 +435,33 @@ a.avalon-mega-no-link {
   align-items: center;
   gap: 12px;
   flex-shrink: 0;
+}
+
+.header-social-icons,
+.vestelli-social-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-social-icons a,
+.vestelli-social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.header-social-icons a:hover,
+.vestelli-social-icons a:hover {
+  opacity: 1;
+}
+
+.header-social-icons svg,
+.vestelli-social-icons svg {
+  display: block;
 }
 
 /* Language Switcher */
@@ -1032,11 +1059,6 @@ a.avalon-mega-no-link {
 
 /* Tighten nav spacing on mid-size desktops to prevent crowding */
 @media (min-width: 1201px) and (max-width: 1500px) {
-  .main-menu > li > a {
-    padding: 10px 6px;
-    font-size: 12px;
-  }
-
   .header-right {
     gap: 12px;
   }

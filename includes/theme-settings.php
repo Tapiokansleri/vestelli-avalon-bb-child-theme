@@ -49,9 +49,30 @@ function va_sanitize_checkbox( $value ) {
 }
 
 /**
+ * Render a theme settings checkbox that saves "0" when unchecked.
+ */
+function va_render_settings_checkbox( $name, $value, $label, $id = '' ) {
+  ?>
+  <input type="hidden" name="<?php echo esc_attr( $name ); ?>" value="0" />
+  <label>
+    <input
+      type="checkbox"
+      name="<?php echo esc_attr( $name ); ?>"
+      value="1"
+      <?php echo $id ? 'id="' . esc_attr( $id ) . '"' : ''; ?>
+      <?php checked( $value, '1' ); ?>
+    />
+    <?php echo esc_html( $label ); ?>
+  </label>
+  <?php
+}
+
+/**
  * Register settings
  */
 add_action( 'admin_init', function() {
+  $checkbox_setting = array( 'sanitize_callback' => 'va_sanitize_checkbox' );
+
   register_setting( 'va_settings', 'va_brand_color', array(
     'sanitize_callback' => 'sanitize_hex_color',
   ) );
@@ -62,7 +83,7 @@ add_action( 'admin_init', function() {
     'sanitize_callback' => 'absint',
   ) );
   register_setting( 'va_settings', 'va_header_design' );
-  register_setting( 'va_settings', 'va_enable_portfolio' );
+  register_setting( 'va_settings', 'va_enable_portfolio', $checkbox_setting );
   register_setting( 'va_settings', 'va_logo' );
   register_setting( 'va_settings', 'va_cta_text' );
   register_setting( 'va_settings', 'va_cta_link' );
@@ -73,7 +94,6 @@ add_action( 'admin_init', function() {
   register_setting( 'va_settings', 'va_social_instagram' );
   register_setting( 'va_settings', 'va_social_linkedin' );
   register_setting( 'va_settings', 'va_social_youtube' );
-  $checkbox_setting = array( 'sanitize_callback' => 'va_sanitize_checkbox' );
   register_setting( 'va_settings', 'va_show_social_icons', $checkbox_setting );
   register_setting( 'va_settings', 'va_show_search', $checkbox_setting );
   register_setting( 'va_settings', 'va_show_language_switcher', $checkbox_setting );
@@ -82,9 +102,9 @@ add_action( 'admin_init', function() {
   register_setting( 'va_settings', 'va_custom_scripts', array(
     'sanitize_callback' => 'va_sanitize_custom_scripts',
   ) );
-  register_setting( 'va_settings', 'va_quote_mode' );
-  register_setting( 'va_settings', 'va_hide_prices' );
-  register_setting( 'va_settings', 'va_hide_catalog_ordering' );
+  register_setting( 'va_settings', 'va_quote_mode', $checkbox_setting );
+  register_setting( 'va_settings', 'va_hide_prices', $checkbox_setting );
+  register_setting( 'va_settings', 'va_hide_catalog_ordering', $checkbox_setting );
   register_setting( 'va_settings', 'va_quote_button_text', array(
     'sanitize_callback' => 'sanitize_text_field',
   ) );
@@ -347,10 +367,7 @@ function va_header_design_field_callback() {
 function va_enable_portfolio_field_callback() {
   $enabled = get_option( 'va_enable_portfolio', '0' );
   ?>
-  <label>
-    <input type="checkbox" name="va_enable_portfolio" value="1" <?php checked( $enabled, '1' ); ?> />
-    <?php _e( 'Ota Portfolio-sisältötyyppi käyttöön', 'vestelli-avalon' ); ?>
-  </label>
+  <?php va_render_settings_checkbox( 'va_enable_portfolio', $enabled, __( 'Ota Portfolio-sisältötyyppi käyttöön', 'vestelli-avalon' ) ); ?>
   <?php
 }
 
@@ -508,13 +525,12 @@ function va_bb_header_template_field_callback() {
 function va_logo_field_callback() {
   $header_type = get_option( 'va_header_type', 'custom' );
   $logo = get_option( 'va_logo' );
-  $logo_https = ! empty( $logo ) ? set_url_scheme( $logo, 'https' ) : '';
   ?>
   <div class="vestelli-logo-upload" id="va_logo_wrapper" <?php echo $header_type !== 'custom' ? 'style="display:none;"' : ''; ?>>
-    <input type="hidden" id="va_logo" name="va_logo" value="<?php echo esc_attr( $logo_https ); ?>" />
+    <input type="hidden" id="va_logo" name="va_logo" value="<?php echo esc_attr( $logo ); ?>" />
     <div id="va_logo_preview" style="margin-bottom: 10px;">
-      <?php if ( $logo_https ) : ?>
-        <img src="<?php echo esc_url( $logo_https ); ?>" style="max-width: 200px; height: auto; display: block;" />
+      <?php if ( $logo ) : ?>
+        <img src="<?php echo esc_url( $logo ); ?>" style="max-width: 200px; height: auto; display: block;" />
       <?php endif; ?>
     </div>
     <button type="button" class="button" id="va_upload_logo_btn">
@@ -546,8 +562,7 @@ function va_logo_field_callback() {
       
       mediaUploader.on('select', function() {
         var attachment = mediaUploader.state().get('selection').first().toJSON();
-        // Convert to HTTPS
-        var logoUrl = attachment.url.replace(/^http:/, 'https:');
+        var logoUrl = attachment.url;
         $('#va_logo').val(logoUrl);
         $('#va_logo_preview').html('<img src="' + logoUrl + '" style="max-width: 200px; height: auto; display: block;" />');
         $('#va_remove_logo_btn').css('display', 'inline-block');
@@ -619,10 +634,7 @@ function va_show_social_icons_callback() {
   $value = get_option( 'va_show_social_icons', '1' );
   ?>
   <div id="va_show_social_icons_wrapper" <?php echo $header_type !== 'custom' ? 'style="display:none;"' : ''; ?>>
-    <label>
-      <input type="checkbox" name="va_show_social_icons" value="1" <?php checked( $value, '1' ); ?> />
-      <?php _e( 'Kyllä (näytä)', 'vestelli-avalon' ); ?>
-    </label>
+    <?php va_render_settings_checkbox( 'va_show_social_icons', $value, __( 'Kyllä (näytä)', 'vestelli-avalon' ) ); ?>
   </div>
   <?php
 }
@@ -632,10 +644,7 @@ function va_show_search_callback() {
   $value = get_option( 'va_show_search', '1' );
   ?>
   <div id="va_show_search_wrapper" <?php echo $header_type !== 'custom' ? 'style="display:none;"' : ''; ?>>
-    <label>
-      <input type="checkbox" name="va_show_search" value="1" <?php checked( $value, '1' ); ?> />
-      <?php _e( 'Kyllä (näytä)', 'vestelli-avalon' ); ?>
-    </label>
+    <?php va_render_settings_checkbox( 'va_show_search', $value, __( 'Kyllä (näytä)', 'vestelli-avalon' ) ); ?>
   </div>
   <?php
 }
@@ -645,10 +654,7 @@ function va_show_language_switcher_callback() {
   $value = get_option( 'va_show_language_switcher', '1' );
   ?>
   <div id="va_show_language_switcher_wrapper" <?php echo $header_type !== 'custom' ? 'style="display:none;"' : ''; ?>>
-    <label>
-      <input type="checkbox" name="va_show_language_switcher" value="1" <?php checked( $value, '1' ); ?> />
-      <?php _e( 'Kyllä (näytä)', 'vestelli-avalon' ); ?>
-    </label>
+    <?php va_render_settings_checkbox( 'va_show_language_switcher', $value, __( 'Kyllä (näytä)', 'vestelli-avalon' ) ); ?>
   </div>
   <?php
 }
@@ -658,10 +664,7 @@ function va_show_cta_callback() {
   $value = get_option( 'va_show_cta', '1' );
   ?>
   <div id="va_show_cta_wrapper" <?php echo $header_type !== 'custom' ? 'style="display:none;"' : ''; ?>>
-    <label>
-      <input type="checkbox" name="va_show_cta" value="1" <?php checked( $value, '1' ); ?> />
-      <?php _e( 'Kyllä (näytä)', 'vestelli-avalon' ); ?>
-    </label>
+    <?php va_render_settings_checkbox( 'va_show_cta', $value, __( 'Kyllä (näytä)', 'vestelli-avalon' ) ); ?>
   </div>
   <?php
 }
@@ -675,10 +678,7 @@ function va_show_cart_callback() {
   }
   ?>
   <div id="va_show_cart_wrapper" <?php echo $header_type !== 'custom' ? 'style="display:none;"' : ''; ?>>
-    <label>
-      <input type="checkbox" name="va_show_cart" value="1" <?php checked( $value, '1' ); ?> />
-      <?php _e( 'Kyllä (näytä)', 'vestelli-avalon' ); ?>
-    </label>
+    <?php va_render_settings_checkbox( 'va_show_cart', $value, __( 'Kyllä (näytä)', 'vestelli-avalon' ) ); ?>
   </div>
   <?php
 }
@@ -761,10 +761,7 @@ function va_woocommerce_section_callback() {
 function va_quote_mode_callback() {
   $value = get_option( 'va_quote_mode', '0' );
   ?>
-  <label>
-    <input type="checkbox" name="va_quote_mode" id="va_quote_mode" value="1" <?php checked( $value, '1' ); ?> />
-    <?php _e( 'Ota tarjouspyyntötila käyttöön', 'vestelli-avalon' ); ?>
-  </label>
+  <?php va_render_settings_checkbox( 'va_quote_mode', $value, __( 'Ota tarjouspyyntötila käyttöön', 'vestelli-avalon' ), 'va_quote_mode' ); ?>
   <p class="description"><?php _e( 'Kun päällä, ostoskori toimii tarjouspyyntölomakkeena ilman maksua.', 'vestelli-avalon' ); ?></p>
   <script>
   jQuery(document).ready(function($) {
@@ -784,10 +781,7 @@ function va_hide_prices_callback() {
   $quote_mode = get_option( 'va_quote_mode', '0' );
   ?>
   <div id="va_hide_prices_wrapper" <?php echo $quote_mode !== '1' ? 'style="display:none;"' : ''; ?>>
-    <label>
-      <input type="checkbox" name="va_hide_prices" value="1" <?php checked( $value, '1' ); ?> />
-      <?php _e( 'Piilota kaikki hinnat sivustolta', 'vestelli-avalon' ); ?>
-    </label>
+    <?php va_render_settings_checkbox( 'va_hide_prices', $value, __( 'Piilota kaikki hinnat sivustolta', 'vestelli-avalon' ) ); ?>
   </div>
   <?php
 }
@@ -795,10 +789,7 @@ function va_hide_prices_callback() {
 function va_hide_catalog_ordering_callback() {
   $value = get_option( 'va_hide_catalog_ordering', '0' );
   ?>
-  <label>
-    <input type="checkbox" name="va_hide_catalog_ordering" value="1" <?php checked( $value, '1' ); ?> />
-    <?php _e( 'Piilota tuotelistauksen lajitteluvalikko', 'vestelli-avalon' ); ?>
-  </label>
+  <?php va_render_settings_checkbox( 'va_hide_catalog_ordering', $value, __( 'Piilota tuotelistauksen lajitteluvalikko', 'vestelli-avalon' ) ); ?>
   <p class="description"><?php _e( 'Hyödyllinen kun hintoja ei vielä näytetä, jolloin esim. "halvin ensin" -lajittelu olisi turhaan listalla.', 'vestelli-avalon' ); ?></p>
   <?php
 }

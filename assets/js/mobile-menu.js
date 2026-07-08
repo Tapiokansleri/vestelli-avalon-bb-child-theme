@@ -237,8 +237,10 @@
       });
     }
 
+    var desktopBreakpoint = document.getElementById('vestelli-header') ? 1400 : 1200;
+
     window.addEventListener('resize', function() {
-      if (window.innerWidth > 1200 && menuToggle.classList.contains('active')) {
+      if (window.innerWidth > desktopBreakpoint && menuToggle.classList.contains('active')) {
         closeMenu();
       }
     });
