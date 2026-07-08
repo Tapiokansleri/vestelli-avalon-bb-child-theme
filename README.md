@@ -53,6 +53,10 @@ To create a release:
 
 ## Changelog
 
+= 0.03 =
+* Release date: July 8, 2026
+* Enable GitHub theme update checks on local WordPress environments
+
 = 0.02 =
 * Release date: July 8, 2026
 * Fix theme settings checkboxes not saving when unchecked (header visibility toggles, WooCommerce options, portfolio toggle)
